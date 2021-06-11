@@ -3,17 +3,6 @@
 function setUsuario(){
     require_once 'database/conexion.php';
     $con = getconfig();
-
-    /* if(validarUsuario() == 1){
-        header('Location: singup.php?status=error1'); 
-    }
-    elseif(validarUsuario() == 2){
-        header('Location: singup.php?status=error2');
-    }
-    elseif(validarUsuario() == 3){
-        header('Location: singup.php?status=error3');
-    }
-    else{ */
         try {
             $query = "INSERT INTO usuarios(nombre,apellido,email,usuario,contra,tipo) VALUES(:nombre,:apellido,:email,:usuario,:contra,:tipo)";
     
@@ -31,7 +20,7 @@ function setUsuario(){
             $statement->closeCursor();
             $con = null;
             
-            //header('Location: singup.php?status=ok');
+            header('Location: login.php');
     
         } catch (Exception $error) {
             print "Error!:".$error->getMessage()."<br>";
@@ -53,9 +42,7 @@ function getUsuario(){
         $query = "SELECT * FROM usuarios WHERE id =:id";
 
         $statement = $con->prepare($query);
-        $statement->execute([
-            ':id'=> $id
-        ]);
+        $statement->execute();
         $res = $statement->fetchAll(PDO::FETCH_ASSOC);
         //cerrar flujo y base de datos
         $statement->closeCursor();
@@ -69,49 +56,85 @@ function getUsuario(){
     }
 }
 
-/* function validarUsuario(){
+function iniciarSesion(){
+    echo "entre";
     require_once 'database/conexion.php';
     $con = getconfig();
-    try {
-        $query = "SELECT * FROM usuarios WHERE usuario =:usuario";
-        $query1 = "SELECT * FROM usuarios WHERE email =:email";
 
+    $usuario = $_POST["usuario"];
+    $contra = $_POST["contra"];
+    
+    $query = "SELECT * FROM usuarios WHERE usuario= :usuario";
+    $statement = $con->prepare($query);
+
+    $statement->execute([
+        ':usuario' => $usuario
+    ]);
+
+    $res = $statement->fetch(PDO::FETCH_ASSOC);
+    var_dump($res);
+    if(password_verify($contra,$res['contra'])){
+
+        $query = "SELECT * FROM usuarios WHERE usuario= :usuario";
         $statement = $con->prepare($query);
-        $statement1 = $con->prepare($query1);
 
         $statement->execute([
-            ':usuario'=>$_POST["usuario"]
-        ]);
-        $statement1->execute([
-            ':email'=>$_POST["email"]
+            ':usuario' => $usuario
         ]);
 
-        $res = $statement->fetchAll(PDO::FETCH_ASSOC);
-        $res1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+        $loginRow = $statement->fetch(PDO::FETCH_ASSOC);
         
-        $statement->closeCursor();
-        $con = null;
+        if($loginRow != false){
 
-        if(count($res)<1 && count($res1)>=1){
-            return 1; //email existente
-        }
-        if(count($res1)<1 && count($res)>=1){
-            return 2; //usuario existente
-        }
-        if(count($res)<1 && count($res1)<1){
-            return 3; //email y usuario existente
+            session_start();
+            setcookie('session_id','token123dhhs25665%#7y', time()+3600,'/');
+
+            $_SESSION['id']= $loginRow['id'];
+            $_SESSION['nombre']= $loginRow['nombre'];
+            $_SESSION['apellido']= $loginRow['apellido'];
+            $_SESSION['usuario']= $loginRow['usuario'];
+            $_SESSION['tipo']= $loginRow['tipo'];
+
+            $statement->closeCursor();
+            $statement = null;
+
+            header('Location: index.php');
         }
         else{
-            return 0; //todo oko
-        }
 
-    } catch (Exception $error) {
-        print "Error!:".$error->getMessage()."<br>";
-        die();
+            $statement->closeCursor();
+            $statement = null;
+           header('Location: login.php?status=error');
+        }
+        
+    }
+    else{
+
+        $statement->closeCursor();
+        $statement = null;
+        header('Location: login.php?status=error');
     }
 }
- */
+
+
+function CerrarSesion(){
+
+    session_start();
+    session_destroy();
+    setcookie('session_id','null', -1,'/');
+
+    //header('Location: ../login.php');
+
+}
 
 if(isset($_GET) && isset($_GET["setUsuario"])){
     setUsuario();
+}
+
+if(isset($_GET) && isset($_GET["acceder"])){
+    iniciarSesion();
+}
+
+if(isset($_GET) && isset($_GET["cerrar"])){
+    CerrarSesion();
 }

@@ -2,31 +2,35 @@
 
 include("head.php");
 
-/* 
-function getError(){
-    if(isset($_GET) && isset($_GET["status"])){
-        if($_GET['status']=='error1'){
-            return 1;
-        }
-        if($_GET['status']=='error2'){
-            return 2;
-        }
-        if($_GET['status']=='error3'){
-            return 3;
-        }
+function getUsuarios(){
+    require_once 'database/conexion.php';
+    $con = getconfig();
+
+    try {
+        $query = "SELECT * FROM usuarios";
+
+        $statement = $con->prepare($query);
+        $statement->execute();
+        $res = $statement->fetchAll(PDO::FETCH_ASSOC);
+        //cerrar flujo y base de datos
+        $statement->closeCursor();
+        $con = null;
+        
+        return $res;
+
+    } catch (Exception $error) {
+        print "Error!:".$a->getMessage()."<br>";
+        die();
     }
 }
 
-$res = getError();
- */
 ?>
 
 <body>
-    <?php include("nav.php");?>
 
     <div class="container">
         <div class="row d-flex justify-content-center mt-5">
-            <form onsubmit="return validarContra()"; action="usuarios.php?setUsuario" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
+            <form onsubmit="return validarUsuario()"; action="usuarios.php?setUsuario" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
                 <div class="mb-3 d-flex justify-content-center">
                     <labl class="h3" style="color:#554dde;">Registrate</label>
                 </div>
@@ -41,20 +45,13 @@ $res = getError();
                 <div class="mb-3">
                     <label class="form-label" style="color:#554dde; font-weight:600;">Nombre de Usuario</label>
                     <input type="username" class="form-control" id="username" name="usuario" style="border:1px solid #554dde;" required>
-                    <?php 
-                        
-                            echo '<div id="" class="form-text" style="color:#FF4D4D;">El usuario está en uso, intenta con otro pibe</div>';
-                        
-                    ?>
+                    <div id="info-usuario" class="form-text"></div>
+                
                 </div>
                 <div class="mb-3">
                     <label class="form-label" style="color:#554dde; font-weight:600;">Coreo electronico</label>
                     <input type="email" class="form-control" id="email" name="email" style="border:1px solid #554dde;" required>
-                    <?php 
-                        
-                            echo '<div id="" class="form-text" style="color:#FF4D4D;">Correo electronico en uso, intenta con otro pibe</div>';
-                        
-                    ?>
+                    <div id="info-email" class="form-text"></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" style="color:#554dde; font-weight:600;">Contraseña</label>
@@ -77,7 +74,7 @@ $res = getError();
 
     <script>
 
-        function validarContra(){
+        function validarContra(){ //devuelve false si la contrasena no esta validada
 
             let contra = $('#password').val()
             let  info = $('#info-contra')
@@ -121,7 +118,70 @@ $res = getError();
                     }
                 }
             }
-        }   
+        } 
+
+        function validarNombreUsuario(json){ //devuelve false para que el usuario se cambie
+
+            let usuarioExiste = false
+            let user = $('#username').val()
+            let  info = $('#info-usuario')
+
+            json.forEach(usuario => {
+                if(user == usuario['usuario']){
+                    usuarioExiste = true
+                }
+            })
+
+            if(usuarioExiste){
+                info.attr("style","color:#FF4D4D");
+                info.text("Nombre de usuario existente, intente con otro")
+                return false
+            }
+            else{
+                info.text(" ")
+                return true
+            }
+
+        }
+
+        function validarEmail(json){ //devuelve false para que el email se cambie
+
+            let emailExiste = false
+            let email = $('#email').val()
+            let  info = $('#info-email')
+
+            json.forEach(usuario => {
+                if(email == usuario['email']){
+                    emailExiste = true
+                }
+            })
+
+            if(emailExiste){
+                info.attr("style","color:#FF4D4D");
+                info.text("El correo electronico esta en uso, intente con otro")
+                return false
+            }
+            else{
+                info.text(" ")
+                return true
+            }
+
+        }
+
+        function validarUsuario(){ 
+            
+            let contra = validarContra()
+            let usuario = validarNombreUsuario(<?php echo json_encode(getUsuarios());?>) 
+            let email = validarEmail(<?php echo json_encode(getUsuarios());?>)
+
+            console.log(contra,usuario,email)
+            if(contra && usuario && email){
+                return true
+            }
+            else {
+                return false
+            }
+        }
 
     </script>
 </body>

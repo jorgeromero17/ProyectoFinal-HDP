@@ -8,3 +8,9 @@
     <script src="https://kit.fontawesome.com/c8a0597b0e.js" crossorigin="anonymous"></script>
     <title>Blog</title>
 </head>
+
+<?php
+
+include("nav.php");
+
+?>
