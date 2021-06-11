@@ -11,6 +11,19 @@
 
 <?php
 
-include("nav.php");
+if(!isset($_COOKIE['session_id']) ){
+        include("nav.php");
+    
+}
+if(isset($_COOKIE['session_id'])){
+    
+    if($_COOKIE['session_id'] != "null"){
+        include("nav1.php");
+    }
+    if($_COOKIE['session_id'] == "null"){
+        include("nav.php");
+    }
+}
+
 
 ?>

@@ -16,4 +16,4 @@ CREATE TABLE usuarios (
 );
 
 INSERT INTO usuarios (nombre, apellido, email, usuario, contra, tipo)
-            VALUES   ('Super', 'Usuario','','admin','admin','1');
+            VALUES   ('Super', 'Usuario','','admin','$2y$10$vzgZZlf08j3iDPk0kKVwbeZp.tlMJA2FLK.aWFvhTa9VJeku.d0yG','1');

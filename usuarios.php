@@ -123,7 +123,7 @@ function CerrarSesion(){
     session_destroy();
     setcookie('session_id','null', -1,'/');
 
-    //header('Location: ../login.php');
+    header('Location: login.php');
 
 }
 

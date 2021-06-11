@@ -16,10 +16,7 @@
             </ul>
             <ul class="d-flex navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="singup.php"><i class="fas fa-address-book me-2"></i>Registrate</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="login.php"><i class="fas fa-sign-out-alt me-2"></i>Iniciar Sesion</a>
+                    <a class="nav-link active" aria-current="page" href="usuarios.php?cerrar"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesion</a>
                 </li>
             </ul>
         </div>
