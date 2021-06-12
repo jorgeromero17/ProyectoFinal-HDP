@@ -56,6 +56,29 @@ function getUsuario(){
     }
 }
 
+
+function getUsuarios(){
+    require_once 'database/conexion.php';
+    $con = getconfig();
+
+    try {
+        $query = "SELECT * FROM usuarios";
+
+        $statement = $con->prepare($query);
+        $statement->execute();
+        $res = $statement->fetchAll(PDO::FETCH_ASSOC);
+        //cerrar flujo y base de datos
+        $statement->closeCursor();
+        $con = null;
+        
+        return $res;
+
+    } catch (Exception $error) {
+        print "Error!:".$a->getMessage()."<br>";
+        die();
+    }
+}
+
 function iniciarSesion(){
     echo "entre";
     require_once 'database/conexion.php';
@@ -98,7 +121,7 @@ function iniciarSesion(){
             $statement->closeCursor();
             $statement = null;
 
-            header('Location: index.php');
+            header('Location: articulos.php');
         }
         else{
 
@@ -123,12 +146,16 @@ function CerrarSesion(){
     session_destroy();
     setcookie('session_id','null', -1,'/');
 
-    header('Location: login.php');
+    header('Location: index.php');
 
 }
 
 if(isset($_GET) && isset($_GET["setUsuario"])){
     setUsuario();
+}
+
+if(isset($_GET) && isset($_GET["getUsuarios"])){
+    $usuarios = getUsuarios();
 }
 
 if(isset($_GET) && isset($_GET["acceder"])){
