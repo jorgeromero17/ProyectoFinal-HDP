@@ -11,19 +11,26 @@
 
 <?php
 
+session_start();
+
 if(!isset($_COOKIE['session_id']) ){
-        include("nav.php");
+    include_once("nav.php");
     
 }
 if(isset($_COOKIE['session_id'])){
     
     if($_COOKIE['session_id'] != "null"){
-        include("nav1.php");
+
+        if($_SESSION['tipo'] == 1){
+            include_once("navAdmin.php");
+        }
+        else{
+            include_once("nav1.php");
+        }
     }
     if($_COOKIE['session_id'] == "null"){
-        include("nav.php");
+        include_once("nav.php");
     }
 }
-
 
 ?>
