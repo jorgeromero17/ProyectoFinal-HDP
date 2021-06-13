@@ -9,7 +9,7 @@ include_once("usuarios.php");
 <body>
     <div class="container mt-5">
         <div class="mb-3 d-flex justify-content-center">
-            <a href="#" class="btn my-3" style="background:#554dde; color:white;">Agregar Usuario</a>
+            <a href="agregarUsuarios.php" class="btn my-3" style="background:#554dde; color:white;">Agregar Usuario</a>
         </div>
         <div class="p-3"  style="border:1px solid #554dde; border-radius:10px;">
             <table class="table table-hover" id="usuarios" style="border:none;">	

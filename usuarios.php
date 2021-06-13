@@ -3,6 +3,11 @@
 function setUsuario(){
     require_once 'database/conexion.php';
     $con = getconfig();
+
+        if(!isset($_POST['tipo'])){
+            $_POST['tipo'] = 0;
+        }
+
         try {
             $query = "INSERT INTO usuarios(nombre,apellido,email,usuario,contra,tipo) VALUES(:nombre,:apellido,:email,:usuario,:contra,:tipo)";
     
@@ -14,13 +19,18 @@ function setUsuario(){
                 ':email'=>$_POST["email"],
                 ':usuario'=>$_POST["usuario"],
                 ':contra'=> password_hash($_POST["contra"],PASSWORD_DEFAULT),
-                ':tipo'=>0
+                ':tipo'=>$_POST["tipo"]
             ]);
            
             $statement->closeCursor();
             $con = null;
             
-            header('Location: login.php');
+            if($_GET['from']=='a'){
+                header('Location: adminUsuarios.php?getUsuarios');
+            }else{
+                header('Location: login.php');
+            }
+            
     
         } catch (Exception $error) {
             print "Error!:".$error->getMessage()."<br>";
