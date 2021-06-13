@@ -2,48 +2,56 @@
 
         function validarContra(){ //devuelve false si la contrasena no esta validada
 
-            let contra = $('#password').val()
-            let  info = $('#info-contra')
-            /* console.log(contra) */
-            
-            if(contra.length < 8){
-                console.log('contra menor a 8')
-                info.attr("style","color:#FF4D4D");
-                info.text('La contraseña deben tener 8 caracteres como mínimo')
-                return false
-            }
-            else{
-                let espacios = false
-                let signos = false
+            if ( $("#password").length ) {
 
-                for (let i = 0; i < contra.length; i++) {
-                    if(contra.charAt(i) == " "){
-                        espacios = true
-                    }
-                    if((contra.charCodeAt(i) >= 33 && contra.charCodeAt(i) <= 47) || (contra.charCodeAt(i) >= 58 && contra.charCodeAt(i) <= 64) || (contra.charCodeAt(i) >= 91 && contra.charCodeAt(i) <= 96)){
-                        signos = true
-                    }
-                }
-
-                if (espacios) {
-                    console.log('con espacio')
+                let contra = $('#password').val()
+                let  info = $('#info-contra')
+                /* console.log(contra) */
+                
+                if(contra.length < 8){
+                    console.log('contra menor a 8')
                     info.attr("style","color:#FF4D4D");
-                    info.text('La contraseña no debe contener espacios')
+                    info.text('La contraseña deben tener 8 caracteres como mínimo')
                     return false
                 }
                 else{
-                    if(signos){
-                        console.log('con signo')
-                        return true
+                    let espacios = false
+                    let signos = false
+
+                    for (let i = 0; i < contra.length; i++) {
+                        if(contra.charAt(i) == " "){
+                            espacios = true
+                        }
+                        if((contra.charCodeAt(i) >= 33 && contra.charCodeAt(i) <= 47) || (contra.charCodeAt(i) >= 58 && contra.charCodeAt(i) <= 64) || (contra.charCodeAt(i) >= 91 && contra.charCodeAt(i) <= 96)){
+                            signos = true
+                        }
                     }
-                    else{
-                        console.log('sin signo')
+
+                    if (espacios) {
+                        console.log('con espacio')
                         info.attr("style","color:#FF4D4D");
-                        info.text('La contraseña debe contener signos')
+                        info.text('La contraseña no debe contener espacios')
                         return false
                     }
+                    else{
+                        if(signos){
+                            console.log('con signo')
+                            return true
+                        }
+                        else{
+                            console.log('sin signo')
+                            info.attr("style","color:#FF4D4D");
+                            info.text('La contraseña debe contener signos')
+                            return false
+                        }
+                    }
                 }
+
             }
+            else {
+                return true
+            }
+
         } 
 
         function validarNombreUsuario(json){ //devuelve false para que el usuario se cambie
