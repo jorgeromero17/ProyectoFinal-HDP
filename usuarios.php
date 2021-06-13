@@ -122,6 +122,37 @@ function modificarUsuario(){
 
 }
 
+function eliminarUsuario(){
+
+    require_once 'database/conexion.php';
+    $con = getconfig();
+    
+    if( isset($_GET["id"])){
+        $id = $_GET["id"];
+    }
+
+    try {
+        $query = "DELETE FROM usuarios WHERE id = :id";
+
+        $statement = $con->prepare($query);
+
+        $statement->execute([
+            ':id' => $id
+        ]);
+       
+        $statement->closeCursor();
+        $con = null;
+        
+        header('Location: adminUsuarios.php?getUsuarios');
+
+    } catch (Exception $error) {
+        print "Error!:".$a->getMessage()."<br>";
+        die();
+    }
+
+
+}
+
 
 function iniciarSesion(){
     echo "entre";
@@ -208,6 +239,10 @@ if(isset($_GET) && isset($_GET["formModificar"]) && isset($_GET["id"]) ){
 
 if(isset($_GET) && isset($_GET["modificar"])){
     modificarUsuario();
+}
+
+if(isset($_GET) && isset($_GET["aksi"]) && $_GET["aksi"]=='delete'){
+    eliminarUsuario();
 }
 
 

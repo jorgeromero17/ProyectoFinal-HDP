@@ -1,28 +1,7 @@
 <?php 
 
 include_once("head.php");
-
-function getUsuarios(){
-    require_once 'database/conexion.php';
-    $con = getconfig();
-
-    try {
-        $query = "SELECT * FROM usuarios";
-
-        $statement = $con->prepare($query);
-        $statement->execute();
-        $res = $statement->fetchAll(PDO::FETCH_ASSOC);
-        //cerrar flujo y base de datos
-        $statement->closeCursor();
-        $con = null;
-        
-        return $res;
-
-    } catch (Exception $error) {
-        print "Error!:".$a->getMessage()."<br>";
-        die();
-    }
-}
+include_once("usuarios.php");
 
 ?>
 <body>

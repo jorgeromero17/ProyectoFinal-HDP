@@ -19,7 +19,7 @@ function imprimirTipo($tipo){
 
     <div class="container">
         <div class="row d-flex justify-content-center mt-5">
-            <form action="usuarios.php?modificar" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
+            <form onsubmit="return validarModificacion()"; action="usuarios.php?modificar" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
                 <div class="mb-3 d-flex justify-content-center">
                     <labl class="h3" style="color:#554dde;">Editar Usuario</label>
                 </div>
@@ -62,19 +62,79 @@ function imprimirTipo($tipo){
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<?php 
-//include('validarUsuario.php');
-?>
+
 <script>
-
-
     let seleccion = $('#tipo').find('option:selected').val()
     console.log(seleccion)
 
-    $("#tipo").change(function(){
+    function validarModificarUsuario(json){ //devuelve false para que el usuario se cambie
+
+        let usuarioExiste = false
+        let user = $('#username').val()
+        let id = $('#id').val()
+        let  info = $('#info-usuario')
+
+        json.forEach(usuario => {
+            if(user == usuario['usuario'] && id != usuario['id']){
+                usuarioExiste = true
+            }
+        })
+
+        if(usuarioExiste){
+            info.attr("style","color:#FF4D4D");
+            info.text("Nombre de usuario existente, intente con otro")
+            return false
+        }
+        else{
+            info.text(" ")
+            return true
+        }
+
+    }
+
+    function validarModificarEmail(json){ //devuelve false para que el email se cambie
+
+        let emailExiste = false
+        let email = $('#email').val()
+        let id = $('#id').val()
+        let  info = $('#info-email')
+
+        json.forEach(usuario => {
+            if(email == usuario['email'] && id != usuario['id'] ){
+                emailExiste = true
+            }
+        })
+
+        if(emailExiste){
+            info.attr("style","color:#FF4D4D");
+            info.text("El correo electronico esta en uso, intente con otro")
+            return false
+        }
+        else{
+            info.text(" ")
+            return true
+        }
+
+    }
+
+    function validarModificacion(){ 
+
+            let usuario = validarModificarUsuario(<?php echo json_encode(getUsuarios());?>) 
+            let email = validarModificarEmail(<?php echo json_encode(getUsuarios());?>)
+
+            console.log(usuario,email)
+            if(usuario && email){
+                return true
+            }
+            else {
+                return false
+            }
+    }
+
+    /* $("#tipo").change(function(){
         let seleccion = $('#tipo').find('option:selected').val()
         console.log(seleccion)
-    })
+    }) */
     
 </script>
 
