@@ -1,4 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background:#554dde;">
+<?php
+$nombre = $_SESSION['nombre']." ".$_SESSION['apellido'];
+?>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:#554dde;height: 8vh;">
     <div class="container-fluid">
         <a class="navbar-brand epimeteo" href="index.php">Epimeteo</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -14,12 +18,17 @@
                     </li>
                 </li>
             </ul>
-           
-            <ul class="d-flex navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="usuarios.php?cerrar"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesion</a>
-                </li>
+
+            <div class="dropdown">
+            <button class="btn btn-outline-light dropdown-toggle mx-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user"></i> <?php echo $nombre;?> </button>
+                
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Configuracion</a></li>
+            <li><a class="dropdown-item" href="usuarios.php?cerrar"><i class="fas fa-sign-out-alt"></i> Cerrar sesion</a></li>
             </ul>
+            </div>
+
         </div>
     </div>
 </nav>
