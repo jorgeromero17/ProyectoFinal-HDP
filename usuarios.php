@@ -3,6 +3,11 @@
 function setUsuario(){
     require_once 'database/conexion.php';
     $con = getconfig();
+
+        if(!isset($_POST['tipo'])){
+            $_POST['tipo'] = 0;
+        }
+
         try {
             $query = "INSERT INTO usuarios(nombre,apellido,email,usuario,contra,tipo) VALUES(:nombre,:apellido,:email,:usuario,:contra,:tipo)";
     
@@ -14,13 +19,18 @@ function setUsuario(){
                 ':email'=>$_POST["email"],
                 ':usuario'=>$_POST["usuario"],
                 ':contra'=> password_hash($_POST["contra"],PASSWORD_DEFAULT),
-                ':tipo'=>0
+                ':tipo'=>$_POST["tipo"]
             ]);
            
             $statement->closeCursor();
             $con = null;
             
-            header('Location: login.php');
+            if($_GET['from']=='a'){
+                header('Location: adminUsuarios.php?getUsuarios');
+            }else{
+                header('Location: login.php');
+            }
+            
     
         } catch (Exception $error) {
             print "Error!:".$error->getMessage()."<br>";
@@ -42,8 +52,11 @@ function getUsuario(){
         $query = "SELECT * FROM usuarios WHERE id =:id";
 
         $statement = $con->prepare($query);
-        $statement->execute();
+        $statement->execute([
+            ':id'=>$id
+        ]);
         $res = $statement->fetchAll(PDO::FETCH_ASSOC);
+
         //cerrar flujo y base de datos
         $statement->closeCursor();
         $con = null;
@@ -78,6 +91,68 @@ function getUsuarios(){
         die();
     }
 }
+
+function modificarUsuario(){
+    require_once 'database/conexion.php';
+    $con = getconfig();
+
+    try {
+        $query = "UPDATE usuarios SET nombre=:nombre,apellido=:apellido,email=:email,usuario=:usuario,tipo=:tipo WHERE id=:id";
+
+        $statement = $con->prepare($query);
+
+        $statement->execute([
+            ':nombre'=>$_POST["nombre"],
+            ':apellido'=>$_POST["apellido"],
+            ':usuario'=>$_POST["usuario"],
+            ':email'=>$_POST["email"],
+            ':tipo'=>$_POST["tipo"],
+            ':id'=> $_POST["id"]
+        ]);
+       
+        $statement->closeCursor();
+        $con = null;
+        
+        header('Location: adminUsuarios.php?getUsuarios');
+
+    } catch (Exception $error) {
+        print "Error!:".$error->getMessage()."<br>";
+        die();
+    }
+
+}
+
+function eliminarUsuario(){
+
+    require_once 'database/conexion.php';
+    $con = getconfig();
+    
+    if( isset($_GET["id"])){
+        $id = $_GET["id"];
+    }
+
+    try {
+        $query = "DELETE FROM usuarios WHERE id = :id";
+
+        $statement = $con->prepare($query);
+
+        $statement->execute([
+            ':id' => $id
+        ]);
+       
+        $statement->closeCursor();
+        $con = null;
+        
+        header('Location: adminUsuarios.php?getUsuarios');
+
+    } catch (Exception $error) {
+        print "Error!:".$a->getMessage()."<br>";
+        die();
+    }
+
+
+}
+
 
 function iniciarSesion(){
     echo "entre";
@@ -157,6 +232,19 @@ if(isset($_GET) && isset($_GET["setUsuario"])){
 if(isset($_GET) && isset($_GET["getUsuarios"])){
     $usuarios = getUsuarios();
 }
+
+if(isset($_GET) && isset($_GET["formModificar"]) && isset($_GET["id"]) ){
+    $usuario = getUsuario();
+}
+
+if(isset($_GET) && isset($_GET["modificar"])){
+    modificarUsuario();
+}
+
+if(isset($_GET) && isset($_GET["aksi"]) && $_GET["aksi"]=='delete'){
+    eliminarUsuario();
+}
+
 
 if(isset($_GET) && isset($_GET["acceder"])){
     iniciarSesion();
