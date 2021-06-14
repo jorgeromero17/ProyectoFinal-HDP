@@ -10,14 +10,12 @@ $nombre=$_SESSION['nombre']." ".$_SESSION['apellido'];
     <div class="container">
         <div class="row d-flex justify-content-center mt-5">
             <form action="guardarPost.php" method="post" enctype="multipart/form-data"  class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
-                <div class="mb-3 d-flex justify-content-center">
-
-                      <label class="h3" style="color:#554dde;"><?php echo $nombre;?></label>
-                                </div>
-                <div class="mb-3 d-flex justify-content-center">
+                <div class="mb-1 d-flex justify-content-center">
                     <label class="h3" style="color:#554dde;">Crear Post</label>
-
-                      <input type="hidden" name='id_usuario' id='id_usuario' value='<?php echo $id_usuario;?>' />
+                    <input type="hidden" name='id_usuario' id='id_usuario' value='<?php echo $id_usuario;?>' />
+                </div>
+                <div class="mb-3 d-flex justify-content-center">
+                    <label class="h6" style="color:#554dde;"><?php echo $nombre;?></label>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" style="color:#554dde; font-weight:600;">Titulo</label>
@@ -26,7 +24,7 @@ $nombre=$_SESSION['nombre']." ".$_SESSION['apellido'];
                 </div>
                 <div class="mb-3">
                     <label class="form-label" style="color:#554dde; font-weight:600;">Contenido</label>
-                    <textarea class="form-control" id="Contenido" name="contenido" style="border:1px solid #554dde;" required></textarea>
+                    <textarea class="form-control" id="Contenido" name="contenido" style="border:1px solid #554dde;height:300px;" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="formFile" class="form-label" style="color:#554dde; font-weight:600;">Imagen de Portada</label>

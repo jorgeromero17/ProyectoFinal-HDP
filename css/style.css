@@ -10,6 +10,29 @@
     
 }
 
+.imagen-post {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+    height:500px;
+    width:90%;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+}
+
+.contenido-post {
+    width:90%;
+    border-top-left-radius:0px;
+    border-top-right-radius:0px; 
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    border-top:none;
+    border-left:1px solid #554dde;
+    border-right:1px solid #554dde;
+    border-bottom:1px solid #554dde;
+    background:white
+}
+
 div > label > select {
     border:1px solid #554dde !important;
     border-radius: 5px !important;
@@ -36,6 +59,19 @@ div > label > input:focus {
 }
 
 
+@media (min-width: 576px) { 
+
+    .imagen-post {
+        width:100%;
+        
+    }
+    
+    .contenido-post {
+        width:100%;
+    }
+    
+ }
+
 @media screen and (min-width: 600px) { 
 
     .texto-bienvenida{
@@ -43,7 +79,6 @@ div > label > input:focus {
         font-size: 1.4rem;
         
     }
-    
 
 }
 
@@ -54,6 +89,45 @@ div > label > input:focus {
         font-size: 1.4rem;
         
     }
+
+    .imagen-post {
+        width:100%;
+        
+    }
+    
+    .contenido-post {
+        width:100%;
+    }
+    
+}
+
+
+@media (min-width: 768px) { 
+
+    .imagen-post {
+        width:100%;
+        
+    }
+    
+    .contenido-post {
+        width:100%;
+    }
+    
+ }
+
+@media screen and (min-width: 1200px) { 
+
+    .imagen-post {
+        width:80%;
+        
+    }
+    
+    .contenido-post {
+        width:80%;
+    }
     
 
 }
+
+
+

@@ -36,31 +36,28 @@ $statement = $con->prepare($query);
             $fecha_crea= fecha_dmy( $row["fecha_crea"]);
             $por=$row["nombre"]." ".$row["apellido"];
 
-             ?>
-        <div class="card col-10 col-sm-10 col-md-5 col-lg-4 col-xl-3 m-3" style="border-radius:10px; border:1px solid #262b47; background:white;">
-            <div class="card-body">
-            
+        ?>
 
-
-            <img src="<?= $img_existente?>"  widht=100 height=100 alt="...">
-                <h5 class="h4 mt-3" style="color:#262b47;font-weight:700;"><?=$titulo ?></h5>
-                <label class="mt-3" style="color:#4f4c89;"><?=$fecha_crea ?></label>
-                <label class="mt-1" style="color:#4f4c89;">Por: <?=$por ?></label>
-                <p class="card-text mt-3" style="color:#4f4c89;line-height:1.7;">
-                <?=$contenido ?>
-                </p>
-                <?php
-               echo' <a type="button" href="vistaArticulo.php?id='.$id.'" class="btn text-light" style="background:#554dde">Leer más<i class="fas fa-chevron-right ms-2"></i></i></a>'
-                ?>
+        <div class="card col-10 col-sm-10 col-md-5 col-lg-4 col-xl-3 m-3" style="border-radius:10px; border:1px solid #262b47; background:white; padding:0;">
+            <div clas="w100" style="background-image: url('<?= $img_existente?>');background-repeat: no-repeat;background-size: cover;background-position: center;height:200px; border-top-left-radius:10px; border-top-right-radius:10px;"></div>
+            <div style="flex: 1;display: flex;flex-direction: column;justify-content: space-between;">
+                <div clas="card-body" style="padding:15px;">
+                    <h5 class="h4 mt-3" style="color:#262b47;font-weight:700;"><?=$titulo ?></h5>
+                    <div class="d-flex flex-column">
+                        <label class="mt-3" style="color:#4f4c89;">Por: <?=$por ?></label>
+                        <label class="mt-1" style="color:#4f4c89;"><?=$fecha_crea ?></label>
+                    </div>
+                </div>
+                <div style="padding:15px;">
+                    <?php echo' <a type="button" href="vistaArticulo.php?id='.$id.'" class="btn text-light" style="background:#554dde">Leer post<i class="fas fa-chevron-right ms-2"></i></i></a>'?>
+                </div>
             </div>
-           
         </div>
-        <?php } ?>
+           
         
-
+        <?php } ?>
 
     </div>
-    
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

@@ -18,9 +18,9 @@ $tipo=$_SESSION['tipo'];
                         <th class="id" style="color:#262b47;">Id</th>
                         <th class="nombre" style="color:#262b47;">Nombre Usuario</th>
                         <th class="titulo" style="color:#262b47;">Titulo</th>
-                        <th class="contenido" style="color:#262b47;">Contenido</th>
+                       <!--  <th class="contenido" style="color:#262b47;">Contenido</th> -->
                         <th class="fecha_crea" style="color:#262b47;">Fecha de creacion</th>
-                        <th style="color:#262b47;">Imagen</th>
+                        <!-- <th style="color:#262b47;">Imagen</th> -->
                         <th style="color:#262b47;">Acciones</th>
                     </tr>
                 </thead>
@@ -33,15 +33,15 @@ $tipo=$_SESSION['tipo'];
                             echo '<td class="id" style="color:#554dde;">'.$posts[$i]['id'].'</td>';
                             echo '<td class="nombre" style="color:#554dde;">'.$posts[$i]['nombre']." ".$posts[$i]['apellido'].'</td>';
                             echo '<td class="titulo" style="color:#554dde;">'.$posts[$i]['titulo'].'</td>';
-                            echo '<td class="contenido" style="color:#554dde;">'.$posts[$i]['contenido'].'</td>';
+                           /*  echo '<td class="contenido" style="color:#554dde;">'.$posts[$i]['contenido'].'</td>'; */
                             echo '<td class="fecha_crea" style="color:#554dde;">'.$posts[$i]['fecha_crea'].'</td>';
-                            echo '<td style="color:#554dde;">'.$posts[$i]['imagen'].'</td>';
+                          /*   echo '<td style="color:#554dde;">'.$posts[$i]['imagen'].'</td>'; */
                             echo '<td >
 							<div class="dropdown">
 							<button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background:#554dde;">Menu</button>
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">';
 							echo '<li><a class="dropdown-item" href="modificarPost.php?id='.$posts[$i]['id'].'"><i class="fas fa-edit me-1"></i> Editar</a></li>';
-							echo '<li><a class="dropdown-item" href="guardarPost.php?aksi=delete&nik='.$posts[$i]['id'].'" onclick="return confirm(\'Esta seguro de borrar los datos '.$post[$i]['nombre'].'?\')"><i class="fas fa-trash-alt me-1"></i> Borrar</a></li>';
+							echo '<li><a class="dropdown-item" href="guardarPost.php?aksi=delete&nik='.$posts[$i]['id'].'" onclick="return confirm(\'Esta seguro de borrar los datos '.$posts[$i]['nombre'].'?\')"><i class="fas fa-trash-alt me-1"></i> Borrar</a></li>';
 							echo "<li><a  class='dropdown-item' href='usuarios.php?codigo=".$posts[$i]['id']."'><i class='fas fa-comments me-2'></i>comentarios</a></li>";
 							echo '</ul>';
 							echo '</div>';
@@ -75,12 +75,37 @@ $(document).ready( function (){
 				"next": "Siguiente"
 			}
 		}
-	});
+	})
 
-       
+        function ocultarCols(){
+            if (screen.width < 400){
+                $(".id").hide()
+                $(".nombre").hide()
+                $(".fecha_crea").hide()
+            }
+            if (screen.width >= 400 && screen.width < 600){
+                $(".id").show()
+                $(".nombre").hide()
+                $(".fecha_crea").hide()
+            }
+            if (screen.width >= 600 && screen.width < 760){
+                $(".id").show()
+                $(".nombre").hide()
+                $(".fecha_crea").show()
+            }
+            if(screen.width >= 768){
+                $(".id").show()
+                $(".nombre").show()
+                $(".fecha_crea").show()
+            }
+        }
+
+        ocultarCols()
+
+        $(window).resize(function() {
+            ocultarCols()
+        }) 
     })
-
-
 </script>
 
 </body>

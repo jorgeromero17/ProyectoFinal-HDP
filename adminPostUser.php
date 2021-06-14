@@ -9,8 +9,6 @@ $tipo=$_SESSION['tipo'];
 <body>
     <div class="container mt-5">
         <div class="mb-3 d-flex justify-content-center">
-            
-            <a href="crearBlog.php" class="btn my-3" style="background:#554dde; color:white;">Agregar post</a>
         </div>
         <div class="p-3"  style="border:1px solid #554dde; border-radius:10px;">
             <table class="table table-hover" id="posts" style="border:none;">	
@@ -19,9 +17,9 @@ $tipo=$_SESSION['tipo'];
                         <th class="id" style="color:#262b47;">Id</th>
                         <th class="nombre" style="color:#262b47;">Nombre Usuario</th>
                         <th class="titulo" style="color:#262b47;">Titulo</th>
-                        <th class="contenido" style="color:#262b47;">Contenido</th>
+                        <!-- <th class="contenido" style="color:#262b47;">Contenido</th> -->
                         <th class="fecha_crea" style="color:#262b47;">Fecha de creacion</th>
-                        <th style="color:#262b47;">Imagen</th>
+                        <!-- <th style="color:#262b47;">Imagen</th> -->
                         <th style="color:#262b47;">Acciones</th>
                     </tr>
                 </thead>
@@ -34,9 +32,9 @@ $tipo=$_SESSION['tipo'];
                             echo '<td class="id" style="color:#554dde;">'.$posts[$i]['id'].'</td>';
                             echo '<td class="nombre" style="color:#554dde;">'.$posts[$i]['nombre']." ".$posts[$i]['apellido'].'</td>';
                             echo '<td class="titulo" style="color:#554dde;">'.$posts[$i]['titulo'].'</td>';
-                            echo '<td class="contenido" style="color:#554dde;">'.$posts[$i]['contenido'].'</td>';
+                            /* echo '<td class="contenido" style="color:#554dde;">'.$posts[$i]['contenido'].'</td>'; */
                             echo '<td class="fecha_crea" style="color:#554dde;">'.$posts[$i]['fecha_crea'].'</td>';
-                            echo '<td style="color:#554dde;">'.$posts[$i]['imagen'].'</td>';
+                            /* echo '<td style="color:#554dde;">'.$posts[$i]['imagen'].'</td>'; */
                             echo '<td >
 							<div class="dropdown">
 							<button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background:#554dde;">Menu</button>

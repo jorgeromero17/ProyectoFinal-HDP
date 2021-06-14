@@ -17,7 +17,7 @@
                         <li><a class="dropdown-item" href="adminPostUser.php"><i class="fas fa-newspaper me-2"></i>Publicaciones otros</a></li>
                         <li><a class="dropdown-item" href="#"><i class="fas fa-comments me-2"></i>Comentarios</a></li>
                         <li class="nav-item">
-                    <a class="nav-link active" href="crearBlog.php?"><i class="me-2"></i>Crear blog</a>
+                    <!-- <a class="nav-link active" href="crearBlog.php?"><i class="me-2"></i>Crear blog</a> -->
                     </li>
                     </ul>
                 </li>

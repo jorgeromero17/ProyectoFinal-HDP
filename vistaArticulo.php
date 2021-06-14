@@ -22,43 +22,28 @@ $statement = $con->prepare($query);
         $statement->closeCursor();
         $con = null;
         foreach ($res as $row){
-            $id_usuario= $row["id_usuario"];
+            $id_usuario= $row["id"];
             $titulo= $row["titulo"];
             $contenido= $row["contenido"];
             $img_existente= $row["imagen"];
+            $fecha= $row["fecha_crea"];
             $por=$row["nombre"]." ".$row["apellido"];
         }
-        
-        
-
 ?>
 
 <body>
-
+    
     <div class="container">
-        <div class="row d-flex justify-content-center mt-5">
-            <form action="articulos.php" enctype="multipart/form-data" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
-                <div class="mb-3 d-flex justify-content-center">
-                
-                <label class="h3" style="color:#554dde;"><?=$titulo ?></label>
-                        </div>
-                        <div class="mb-3 d-flex justify-content-center">
-                        <label class="mt-1" style="color:#4f4c89;">Por: <?=$por ?></label>
-                        </div>
-                <div class="mb-3 d-flex justify-content-center">
-                <img src="<?= $img_existente?>"  widht=200 height=200 alt="...">
+        <div class="row d-flex justify-content-center my-5">    
+            <div class="imagen-post" style="background-image: url('<?= $img_existente?>');"></div> 
+            <div class="contenido-post">
+                <h1 class="my-4 display-4" style="font-weight:600; padding:30px;"><?=$titulo ?></h1>
+                <p class="" style="font-weight:regular; padding:30px;"><?=$contenido ?></p>
+                <div class="h6" style="padding: 0px 30px 30px 30px" >
+                    <p class=""><?=$por ?></p>
+                    <p class="" ><?=$fecha ?></p>
                 </div>
-               
-                <div class="mb-3">
-                <textarea class="form-control" readonly id="Contenido" name="contenido" style="border:1px solid #554dde;"  required><?=$contenido ?></textarea>
-                </div>
-                <div class="d-grid gap-2 ">
-                <button type="submit" class="btn text-light mt-3" style="background:#554dde;font-weight:600;">regresar</button>
-                </div>
-
-                </div>
-
-                </form>
+            </div>
         </div>
     </div>
 
