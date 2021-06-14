@@ -9,8 +9,12 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" href="#"><i class="fas fa-users me-2"></i>Nosotros</a>
+                    <li class="nav-item">
+                    <a class="nav-link active" href="crearBlog.php?"><i class="me-2"></i>Crear blog</a>
+                    </li>
                 </li>
             </ul>
+           
             <ul class="d-flex navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="usuarios.php?cerrar"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesion</a>
