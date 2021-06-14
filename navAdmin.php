@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background:#554dde;">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:#554dde;height: 8vh;">
     <div class="container-fluid">
         <a class="navbar-brand epimeteo" href="articulos.php">Epimeteo</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

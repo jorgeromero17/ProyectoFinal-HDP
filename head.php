@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Blog</title>
 </head>
-
+<body>
 <?php
 
 session_start();

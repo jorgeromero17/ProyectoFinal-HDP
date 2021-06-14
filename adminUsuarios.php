@@ -3,7 +3,6 @@
 include_once("head.php");
 include_once("usuarios.php");
 
-
 ?>
 
 <body>

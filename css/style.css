@@ -55,9 +55,7 @@ div > label > input:focus {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 100vh;
 }
-
 
 @media (min-width: 576px) { 
 
