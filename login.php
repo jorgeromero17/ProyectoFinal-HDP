@@ -2,7 +2,7 @@
 
 function getError(){
     if(isset($_GET) && isset($_GET["status"])){
-        return '<div id="info-email" class="form-text" style="color:#FF4D4D;">Usuario y/o contraseña incorrectas</div>';
+        return '<div id="info-email" class="form-text mt-2" style="color:#FF4D4D;">Usuario y/o contraseña incorrectas</div>';
     }
 }
 

@@ -121,6 +121,42 @@ function modificarUsuario(){
     }
 
 }
+function modificarContra(){
+
+    require_once 'database/conexion.php';
+    $con = getconfig();
+
+    $usuario = getUsuario();
+    $contra = $usuario[0]['contra'];
+    $contraActual = $_POST['contraActual'];
+
+    if(password_verify($contraActual,$contra)){
+        try {
+            $query = "UPDATE usuarios SET contra=:contra WHERE id=:id";
+    
+            $statement = $con->prepare($query);
+    
+            $statement->execute([
+                ':contra'=>password_hash($_POST["contra"],PASSWORD_DEFAULT),
+                ':id'=> $_GET["id"]
+            ]);
+           
+            $statement->closeCursor();
+            $con = null;
+            
+           header('Location: modificarContra.php?status=ok');
+    
+        } catch (Exception $error) {
+            print "Error!:".$error->getMessage()."<br>";
+            die();
+        }     
+    }
+    else {
+        header('Location: modificarContra.php?status=error');
+    }
+
+}
+
 
 function eliminarUsuario(){
 
@@ -239,6 +275,10 @@ if(isset($_GET) && isset($_GET["formModificar"]) && isset($_GET["id"]) ){
 
 if(isset($_GET) && isset($_GET["modificar"])){
     modificarUsuario();
+}
+
+if(isset($_GET) && isset($_GET["modificarContra"])){
+    modificarContra();
 }
 
 if(isset($_GET) && isset($_GET["aksi"]) && $_GET["aksi"]=='delete'){

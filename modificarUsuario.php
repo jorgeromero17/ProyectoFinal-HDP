@@ -15,8 +15,6 @@ function imprimirTipo($tipo){
 ?>
 <body>
 
-<body>
-
     <div class="container">
         <div class="row d-flex justify-content-center mt-5">
             <form onsubmit="return validarModificacion()"; action="usuarios.php?modificar" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
@@ -46,12 +44,17 @@ function imprimirTipo($tipo){
                     <input type="email" class="form-control" id="email" name="email" style="border:1px solid #554dde;" <?='value="'.$usuario[0]['email'].'"'?> required>
                     <div id="info-email" class="form-text"></div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" style="color:#554dde; font-weight:600;">Tipo de Usuario</label>
-                    <select id="tipo" name="tipo" class="form-select form-select-sm" aria-label=".form-select-sm example" style="border:1px solid #554dde; height:40px;" required>
-                        <?php imprimirTipo($usuario[0]['tipo']);?>
-                    </select>
-                </div>
+                <?php 
+                    if($_SESSION['tipo']==1){
+                        echo '
+                            <div class="mb-3">
+                            <label class="form-label" style="color:#554dde; font-weight:600;">Tipo de Usuario</label>
+                            <select id="tipo" name="tipo" class="form-select form-select-sm" aria-label=".form-select-sm example" style="border:1px solid #554dde; height:40px;" required>';
+                                imprimirTipo($usuario[0]['tipo']);
+                        echo '</select>
+                            </div> ';
+                    }
+                ?>
                 <div class="d-grid gap-2 ">
                     <button type="submit" class="btn text-light mt-3" style="background:#554dde;font-weight:600;">Guardar</button>
                 </div>
