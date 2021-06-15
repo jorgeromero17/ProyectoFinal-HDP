@@ -157,6 +157,46 @@ function modificarContra(){
 
 }
 
+function silenciarUsuario(){
+
+    require_once 'database/conexion.php';
+    $con = getconfig();
+    
+    if( isset($_GET["id"])){
+        $id = $_GET["id"];
+    }
+    if( $_GET["aksi"] == 'silence'){
+        $silence = 1;
+    }
+    else {
+        $silence = 0;
+    }
+
+    var_dump($silence);
+    try {
+        $query = "UPDATE usuarios SET inactivar_coment=:silence WHERE id=:id";
+
+        $statement = $con->prepare($query);
+
+        $statement->execute([
+            ':silence' => $silence,
+            ':id' => $id
+        ]);
+       
+        $statement->closeCursor();
+        $con = null;
+        
+        header('Location: adminUsuarios.php?getUsuarios');
+
+    } catch (Exception $error) {
+        print "Error!:".$error->getMessage()."<br>";
+        die();
+    }
+
+
+}
+
+
 
 function eliminarUsuario(){
 
@@ -182,7 +222,7 @@ function eliminarUsuario(){
         header('Location: adminUsuarios.php?getUsuarios');
 
     } catch (Exception $error) {
-        print "Error!:".$a->getMessage()."<br>";
+        print "Error!:".$error->getMessage()."<br>";
         die();
     }
 
@@ -280,6 +320,11 @@ if(isset($_GET) && isset($_GET["modificar"])){
 if(isset($_GET) && isset($_GET["modificarContra"])){
     modificarContra();
 }
+
+if(isset($_GET) && isset($_GET["aksi"]) && $_GET["aksi"]=='silence' || isset($_GET) && isset($_GET["aksi"]) && $_GET["aksi"]=='disilence'){
+    silenciarUsuario();
+}
+
 
 if(isset($_GET) && isset($_GET["aksi"]) && $_GET["aksi"]=='delete'){
     eliminarUsuario();
