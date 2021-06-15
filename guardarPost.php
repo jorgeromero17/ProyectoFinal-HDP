@@ -81,12 +81,12 @@ function getpostAdmin($id_usuario){
         //cerrar flujo y base de datos
         $statement->closeCursor();
         $con = null;
-        header('Location: adminPost.php');
+        //header('Location: adminPost.php');
         
         return $res;
 
     } catch (Exception $error) {
-        print "Error!:".$a->getMessage()."<br>";
+        print "Error!:".$error->getMessage()."<br>";
         die();
     }
 }
@@ -108,12 +108,12 @@ function getpostUser($id_usuario){
         //cerrar flujo y base de datos
         $statement->closeCursor();
         $con = null;
-        header('Location: adminPostUser.php');
+        //header('Location: adminPostUser.php');
         
         return $res;
 
     } catch (Exception $error) {
-        print "Error!:".$a->getMessage()."<br>";
+        print "Error!:".$error->getMessage()."<br>";
         die();
     }
 }
