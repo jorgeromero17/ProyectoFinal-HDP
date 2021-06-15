@@ -1,7 +1,7 @@
 <?php 
 
-include_once("head.php");
-include_once("guardarPost.php");
+include_once 'head.php';
+include_once 'guardarPost.php';
 $id_usuario= $_SESSION['id'];
 $tipo=$_SESSION['tipo'];
 ?>
