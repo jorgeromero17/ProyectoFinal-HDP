@@ -44,8 +44,35 @@ $statement = $con->prepare($query);
                     <p class="" ><?=$fecha ?></p>
                 </div>
             </div>
+
+            <div class="contenido-post overflow-auto mt-4" style="border-radius:10px;border:1px solid #262b47;padding:0;height:400px;">
+                
+                <div class="">
+                    <p class="h5 mt-4 mx-auto" style="width:90%;">Comentarios</p>
+                    
+                    <form class="my-4 mx-auto d-flex flex-column" style="height:250px; width:90%;">
+                        <textarea class="p-4" name="comentario" id="" cols="30" rows="10" placeholder="Agregar comentario..." style='width:100%;height:200px;;border:1px solid #554dde;background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;'></textarea>
+                        <button type="submit" class="btn text-light mt-3 align-self-end" style="background:#554dde;font-weight:600;">Agregar</button>
+                    </form>
+
+                    <div class="my-4 p-4 mx-auto" style="background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;  min-height:200px; width:90%;">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta maxime, quisquam, magni quod omnis natus officia.
+                    </div>
+                    <div class="my-4 p-4 mx-auto" style="background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;  min-height:200px; width:90%;">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta maxime, quisquam, magni quod omnis natus officia.
+                    </div>
+                    <div class="my-4 p-4 mx-auto" style="background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;  min-height:200px; width:90%;">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta maxime, quisquam, magni quod omnis natus officia.
+                    </div>
+                </div>
+                
+            </div>
+
         </div>
     </div>
+
+
+    
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
