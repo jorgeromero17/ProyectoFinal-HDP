@@ -9,7 +9,7 @@
         $contenido =$_POST["contenido"];
         $id_usuario =$_POST["id_usuario"];
         $img_existente =$_POST["img_existente"];
-        $imagenNueva =$_POST["imagenNueva"];
+        //$imagenNueva =$_POST["imagenNueva"];
         $fecha_crea=date('Y-m-d');
         $dir_image="img"; //directorio de imagenes
        
@@ -53,28 +53,33 @@
     function subir_imagen($directorio_destino, $nombre_archivo)
     {
        
-        $tmp_name = $_FILES[$nombre_archivo]['tmp_name'];
+        if($nombre_archivo!=''){
+            $tmp_name = $_FILES[$nombre_archivo]['tmp_name'];
         
-        //si hemos enviado un directorio que existe realmente y hemos subido el archivo
-        if (is_dir($directorio_destino) && is_uploaded_file($tmp_name))
-        {
-          $prefijo=date('Y-m-d')."_".mt_rand(1,30)."_";
-          
-            $img_file = $prefijo.$_FILES[$nombre_archivo]['name'];
-            $img_type = $_FILES[$nombre_archivo]['type'];
-            // Si se trata de una imagen del tipo
-            if (((strpos($img_type, "gif") || strpos($img_type, "jpeg") || strpos($img_type, "jpg")) || strpos($img_type, "png")))
+            //si hemos enviado un directorio que existe realmente y hemos subido el archivo
+            if (is_dir($directorio_destino) && is_uploaded_file($tmp_name))
             {
-               
-                //debe tener  permisos para subir la imágen
-                if (move_uploaded_file($tmp_name, $directorio_destino . '/' . $img_file))
+            $prefijo=date('Y-m-d')."_".mt_rand(1,30)."_";
+            
+                $img_file = $prefijo.$_FILES[$nombre_archivo]['name'];
+                $img_type = $_FILES[$nombre_archivo]['type'];
+                // Si se trata de una imagen del tipo
+                if (((strpos($img_type, "gif") || strpos($img_type, "jpeg") || strpos($img_type, "jpg")) || strpos($img_type, "png")))
                 {
-                 //  echo "imagen:".$img_file;
-                    return $img_file;
-    
+                
+                    //debe tener  permisos para subir la imágen
+                    if (move_uploaded_file($tmp_name, $directorio_destino . '/' . $img_file))
+                    {
+                    //  echo "imagen:".$img_file;
+                        return $img_file;
+        
+                    }
                 }
             }
         }
+        else{
+            return false;
+        }
         //Si nos retorna false algo ha fallado
-        return "nodisponible.jpg";
+        //return "nodisponible.jpg";
     }

@@ -2,12 +2,16 @@
 
 include("head.php");
 
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+}
+
 ?>
 <body>
 
     <div class="container">
         <div class="row d-flex justify-content-center mt-5">
-            <form onsubmit="return validarPass()"; action="usuarios.php?modificarContra&id=<?=$_SESSION['id']?>" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
+            <form onsubmit="return validarPass()"; action="usuarios.php?modificarContra&id=<?=$id?>" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
                 <div class="mb-3 d-flex justify-content-center">
                     <labl class="h3" style="color:#554dde;">Editar Contraseña</label>
                 </div>

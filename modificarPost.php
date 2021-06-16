@@ -41,7 +41,6 @@ $statement = $con->prepare($query);
                 
                 <img src="<?= $img_existente?>"  widht=100 height=100 alt="...">
                     <input type="hidden" name='id_usuario' id='id_usuario' value='<?php echo $id_usuario;?>' />
-                    <input type="hidden" name='img_existente' id='img_existente' value="<?=$img_existente?>" />
                     <input type="hidden" name='id_post' id='id_post' value="<?=$id?>" />
                 </div>
                 <div class="mb-3">
@@ -56,7 +55,7 @@ $statement = $con->prepare($query);
                 <div class="mb-3">
                 <label for="formFile" class="form-label" style="color:#554dde; font-weight:600;">Imagen de Portada</label>
                 <input class="form-control" type="file" id="imagenNueva" name="imagenNueva" style="border:1px solid #554dde;" >
-                
+                <input type="text" name='img_existente' id='img_existente' value="<?=$img_existente?>" />
                 <div class="d-grid gap-2 ">
                 <button type="submit" class="btn text-light mt-3" style="background:#554dde;font-weight:600;">Guardar</button>
                 </div>

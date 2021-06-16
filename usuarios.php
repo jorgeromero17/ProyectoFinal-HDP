@@ -96,6 +96,11 @@ function modificarUsuario(){
     require_once 'database/conexion.php';
     $con = getconfig();
 
+    if(!isset($_POST['tipo'])){
+        $_POST['tipo'] = 0;
+    }
+    
+
     try {
         $query = "UPDATE usuarios SET nombre=:nombre,apellido=:apellido,email=:email,usuario=:usuario,tipo=:tipo WHERE id=:id";
 
@@ -113,7 +118,12 @@ function modificarUsuario(){
         $statement->closeCursor();
         $con = null;
         
-        header('Location: adminUsuarios.php?getUsuarios');
+        if($_POST['tipoModificando'] == 1){
+            header('Location: adminUsuarios.php?getUsuarios');
+        }
+        else{
+            header('Location: modificarUsuario.php?formModificar&id='.$_POST["id"]."&status=ok");
+        }   
 
     } catch (Exception $error) {
         print "Error!:".$error->getMessage()."<br>";
@@ -127,6 +137,7 @@ function modificarContra(){
     $con = getconfig();
 
     $usuario = getUsuario();
+    $id = $usuario[0]['id'];
     $contra = $usuario[0]['contra'];
     $contraActual = $_POST['contraActual'];
 
@@ -138,13 +149,13 @@ function modificarContra(){
     
             $statement->execute([
                 ':contra'=>password_hash($_POST["contra"],PASSWORD_DEFAULT),
-                ':id'=> $_GET["id"]
+                ':id'=> $id
             ]);
            
             $statement->closeCursor();
             $con = null;
             
-           header('Location: modificarContra.php?status=ok');
+           header('Location: modificarContra.php?status=ok&id='.$id);
     
         } catch (Exception $error) {
             print "Error!:".$error->getMessage()."<br>";
@@ -152,7 +163,7 @@ function modificarContra(){
         }     
     }
     else {
-        header('Location: modificarContra.php?status=error');
+        header('Location: modificarContra.php?status=error&id='.$id);
     }
 
 }
@@ -268,6 +279,7 @@ function iniciarSesion(){
             $_SESSION['apellido']= $loginRow['apellido'];
             $_SESSION['usuario']= $loginRow['usuario'];
             $_SESSION['tipo']= $loginRow['tipo'];
+            $_SESSION['inactivar_coment'] = $loginRow['inactivar_coment'];
 
             $statement->closeCursor();
             $statement = null;

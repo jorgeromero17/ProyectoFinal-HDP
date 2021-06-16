@@ -31,8 +31,8 @@ $nombre = $_SESSION['nombre']." ".$_SESSION['apellido'];
             <i class="fas fa-user"></i> <?php echo $nombre;?> </button>
                 
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="modificarUsuario.php?formModificar&id=<?=$_SESSION['id']?>"><i class="fas fa-user-edit me-2"></i>Editar Perfil</a></li>
-            <li><a class="dropdown-item" href="modificarContra.php"><i class="fas fa-key me-2"></i>Editar Contraseña</a></li>
+            <!-- <li><a class="dropdown-item" href="modificarUsuario.php?formModificar&id=<?php /* echo $_SESSION['id']; */ ?>"><i class="fas fa-user-edit me-2"></i>Editar Perfil</a></li>
+            <li><a class="dropdown-item" href="modificarContra.php"><i class="fas fa-key me-2"></i>Editar Contraseña</a></li> -->
             <li><a class="dropdown-item" href="usuarios.php?cerrar"><i class="fas fa-sign-out-alt me-2"></i> Cerrar sesion</a></li>
             </ul>
             </div>

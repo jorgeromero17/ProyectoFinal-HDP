@@ -35,8 +35,9 @@ include_once("usuarios.php");
 							<div class="dropdown">
 							<button class="btn dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background:#554dde;">Menu</button>
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">';
-							echo '<li><a class="dropdown-item" href="modificarUsuario.php?formModificar&id='.$usuarios[$i]['id'].'"><i class="fas fa-edit me-1"></i> Editar</a></li>';
-							echo '<li><a class="dropdown-item" href="usuarios.php?aksi=delete&id='.$usuarios[$i]['id'].'" onclick="return confirm(\'Esta seguro de borrar los datos de '.$usuarios[$i]['nombre'].'?\')"><i class="fas fa-trash-alt me-1"></i> Borrar</a></li>';
+							echo '<li><a class="dropdown-item" href="modificarUsuario.php?formModificar&id='.$usuarios[$i]['id'].'"><i class="fas fa-edit me-1"></i>Editar Perfil</a></li>';
+                            echo '<li><a class="dropdown-item" href="modificarContra.php?id='.$usuarios[$i]['id'].'"><i class="fas fa-key me-1"></i> Editar Contraseña</a></li>';
+							echo '<li><a class="dropdown-item" href="usuarios.php?aksi=delete&id='.$usuarios[$i]['id'].'" onclick="return confirm(\'Esta seguro de borrar los datos de '.$usuarios[$i]['nombre'].'?\')"><i class="fas fa-trash-alt me-1"></i> Borrar Usuario</a></li>';
 							if($usuarios[$i]['inactivar_coment']==1){
                                 echo '<li><a class="dropdown-item" href="usuarios.php?aksi=disilence&id='.$usuarios[$i]['id'].'" onclick="return confirm(\'Esta seguro de desilenciar a '.$usuarios[$i]['nombre'].'?\')"><i class="fas fa-comment-dots me-1"></i>Desilenciar</a></li>';
                             }

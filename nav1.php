@@ -4,7 +4,7 @@ $nombre = $_SESSION['nombre']." ".$_SESSION['apellido'];
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background:#554dde;">
     <div class="container-fluid">
-        <a class="navbar-brand epimeteo" href="index.php">Epimeteo</a>
+        <a class="navbar-brand epimeteo" href="articulos.php">Epimeteo</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@ $nombre = $_SESSION['nombre']." ".$_SESSION['apellido'];
                 
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="modificarUsuario.php?formModificar&id=<?=$_SESSION['id']?>"><i class="fas fa-user-edit me-2"></i>Editar Perfil</a></li>
-            <li><a class="dropdown-item" href="modificarContra.php"><i class="fas fa-key me-2"></i>Editar Contraseña</a></li>
+            <li><a class="dropdown-item" href="modificarContra.php?id=<?=$_SESSION['id']?>"><i class="fas fa-key me-2"></i>Editar Contraseña</a></li>
             <li><a class="dropdown-item" href="usuarios.php?cerrar"><i class="fas fa-sign-out-alt"></i> Cerrar sesion</a></li>
             </ul>
             </div>

@@ -44,6 +44,7 @@ function imprimirTipo($tipo){
                     <input type="email" class="form-control" id="email" name="email" style="border:1px solid #554dde;" <?='value="'.$usuario[0]['email'].'"'?> required>
                     <div id="info-email" class="form-text"></div>
                 </div>
+                <input type="hidden" name='tipoModificando' id='' value="<?=$_SESSION['tipo']?>" />
                 <?php 
                     if($_SESSION['tipo']==1){
                         echo '
@@ -58,6 +59,13 @@ function imprimirTipo($tipo){
                 <div class="d-grid gap-2 ">
                     <button type="submit" class="btn text-light mt-3" style="background:#554dde;font-weight:600;">Guardar</button>
                 </div>
+                <?php
+                if(isset($_GET['status'])){
+                    if($_GET['status']=='ok'){
+                        echo '<div id="info-correta" class="form-text mt-2 text-success">Sus datos se modificaron satisfactoriamente</div>';
+                    }
+                }
+                ?> 
             </form>    
         </div>
     </div>
