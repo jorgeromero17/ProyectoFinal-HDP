@@ -2,7 +2,7 @@
 include("head.php");
 ?>
 
-<div class="main-bienvenida" style="height: 92vh;">
+<div class="main-bienvenida" style="height: 100vh;">
     <div class="container pt-5">
         <h2 class="display-6 mt-5 text-light">Bienvenido a</h2>
         <h1 class="display-1 mb-5 text-light epimeteo">Epimeteo</h1>

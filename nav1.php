@@ -2,7 +2,7 @@
 $nombre = $_SESSION['nombre']." ".$_SESSION['apellido'];
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background:#554dde;height: 8vh;">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:#554dde;">
     <div class="container-fluid">
         <a class="navbar-brand epimeteo" href="index.php">Epimeteo</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
