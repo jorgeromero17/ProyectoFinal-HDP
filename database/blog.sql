@@ -34,7 +34,7 @@ CREATE TABLE `coments` (
   `comentario` text NOT NULL,
   `fecha` date NOT NULL,
   `aprobado` tinyint(1) NOT NULL,
-  `id_post` int(1) NOT NULL,
+  `id_post` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -86,6 +86,11 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `usuario`, `contra`
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
+-- Indices de la tabla `posts`
+--
+ALTER TABLE `coments`
+  ADD PRIMARY KEY (`id`);
+
 --
 -- Indices de la tabla `usuarios`
 --
@@ -107,6 +112,12 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+-- AUTO_INCREMENT de la tabla `coments`
+--
+ALTER TABLE `coments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 

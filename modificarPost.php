@@ -1,4 +1,6 @@
 <?php include("head.php");
+include_once("sesionUsuario.php");
+
 //include_once("guardarPost.php");
 require_once 'database/conexion.php';
 $con = getconfig();
@@ -20,9 +22,6 @@ $statement = $con->prepare($query);
             $contenido= $row["contenido"];
             $img_existente= $row["imagen"];
         }
-        
-        
-
 ?>
 
 

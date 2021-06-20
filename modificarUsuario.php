@@ -1,5 +1,6 @@
 <?php include("head.php");
 include_once("usuarios.php");
+include_once("sesionUsuario.php");
 
 function imprimirTipo($tipo){
     if($tipo=='1'){

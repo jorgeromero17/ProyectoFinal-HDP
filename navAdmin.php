@@ -17,8 +17,9 @@ $nombre = $_SESSION['nombre']." ".$_SESSION['apellido'];
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="adminUsuarios.php?getUsuarios"><i class="fas fa-users me-2"></i>Usuarios</a></li>
                         <li><a class="dropdown-item" href="adminPost.php"><i class="fas fa-newspaper me-2"></i>Mis Publicaciones</a></li>
-                        <li><a class="dropdown-item" href="adminPostUser.php"><i class="fas fa-newspaper me-2"></i>Publicaciones otros</a></li>
-                        <li><a class="dropdown-item" href="moderarComentarios.php"><i class="fas fa-comments me-2"></i>Comentarios</a></li>
+                        <!-- <li><a class="dropdown-item" href="adminPostUser.php"><i class="fas fa-newspaper me-2"></i>Publicaciones otros</a></li> -->
+                        <li><a class="dropdown-item" href="comentariosNuevos.php"><i class="fas fa-comments me-2"></i>Comentarios Nuevos</a></li>
+                        <li><a class="dropdown-item" href="comentariosRechazados.php"><i class="fas fa-comments me-2"></i>Comentarios Rechazados</a></li>
                         <li class="nav-item">
                     <!-- <a class="nav-link active" href="crearBlog.php?"><i class="me-2"></i>Crear blog</a> -->
                     </li>

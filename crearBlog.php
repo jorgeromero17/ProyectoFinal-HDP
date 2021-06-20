@@ -1,6 +1,8 @@
 <?php
 include("head.php");
 include("guardarPost.php");
+include_once("sesionAdmin.php");
+
 $id_usuario= $_SESSION['id'];
 $nombre=$_SESSION['nombre']." ".$_SESSION['apellido'];
 ?>

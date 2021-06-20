@@ -1,5 +1,9 @@
 <?php include("head.php");
 
+if(isset($_SESSION['id'])){
+    header("Location: articulos.php");
+}
+
 function getError(){
     if(isset($_GET) && isset($_GET["status"])){
         return '<div id="info-email" class="form-text mt-2" style="color:#FF4D4D;">Usuario y/o contraseña incorrectas</div>';

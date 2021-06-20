@@ -1,6 +1,7 @@
 <?php include("head.php");
 include("funciones.php");
 
+
 function getAllPosts(){ 
     require_once 'database/conexion.php';
     $con = getconfig();
@@ -82,7 +83,7 @@ else { //si no, evaluamos que este seteada la busqueda en el POST
             
             if(count($res) < 1){
                 echo '<div class="alert alert-danger d-flex aling-content-center" role="alert">
-                        <i class="fas fa-heart-broken me-2" style="font-size:25px;"></i><strong>No se encontraron coincidencias para su busqueda...</strong>
+                        <i class="fas fa-heart-broken me-2" style="font-size:25px;"></i><strong>Raios, no se han encontrado resultados...</strong>
                     </div>';
             }
             else{

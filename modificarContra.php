@@ -1,6 +1,7 @@
 <?php 
 
 include("head.php");
+include_once("sesionUsuario.php");
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];

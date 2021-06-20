@@ -3,6 +3,10 @@
 include_once("head.php");
 include_once("usuarios.php");
 
+if(isset($_SESSION['id'])){
+    header("Location: articulos.php");
+}
+
 ?>
 
 <body>

@@ -1,5 +1,10 @@
 <?php 
 include("head.php");
+
+if(isset($_SESSION['id'])){
+    header("Location: articulos.php");
+}
+
 ?>
 
 <div class="main-bienvenida" style="height: 100vh;">
@@ -10,10 +15,10 @@ include("head.php");
             <p class="">El mejor blog sobre mitología griega.</p>
             <p class="mt-2">Para ver el contenido y agregar opiniones debes loguearte ó regístrarte. Tendrás acceso inmediato a contenido exclusivo sobre la mitología de unas de las culturas más antiguas.</p>
         </div>
-        <!-- <div class="mt-5">
+        <div class="mt-5">
         <a href="singup.php" class="btn btn-lg text-light me-3 px-5 mb-4" style="background:#262b47;">Registrate</a>
         <a href="login.php" class="btn btn-lg text-light me-3 px-5 mb-4" style="background:#262b47;">Iniciar Sesión</a>
-        </div> -->
+        </div>
         </div>
 </div>
 

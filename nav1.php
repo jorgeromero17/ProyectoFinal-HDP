@@ -12,7 +12,7 @@ $nombre = $_SESSION['nombre']." ".$_SESSION['apellido'];
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#"><i class="fas fa-users me-2"></i>Nosotros</a>
+                    <a class="nav-link active" href="nosotros.php"><i class="fas fa-users me-2"></i>Nosotros</a>
 
                 </li>
             </ul>
