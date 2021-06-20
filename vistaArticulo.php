@@ -1,5 +1,6 @@
 <?php include("head.php");
-//include_once("guardarPost.php");
+include_once("sesionUsuario.php");
+
 require_once 'database/conexion.php';
 $con = getconfig();
 date_default_timezone_set('America/El_Salvador');

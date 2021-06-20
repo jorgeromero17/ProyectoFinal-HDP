@@ -6,7 +6,7 @@
     if(!empty($_POST)){
         $titulo =$_POST["titulo"];
         $id =$_POST["id_post"];
-        $contenido =$_POST["contenido"];
+        $contenido =nl2br($_POST["contenido"]);
         $id_usuario =$_POST["id_usuario"];
         $img_existente =$_POST["img_existente"];
         //$imagenNueva =$_POST["imagenNueva"];

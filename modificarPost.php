@@ -1,5 +1,5 @@
 <?php include("head.php");
-include_once("sesionUsuario.php");
+include_once("sesionAdmin.php");
 
 //include_once("guardarPost.php");
 require_once 'database/conexion.php';
@@ -48,7 +48,7 @@ $statement = $con->prepare($query);
 
                 </div>
                 <div class="mb-3">
-                <label class="form-label" style="color:#554dde; font-weight:600;">Contenido</label>
+                <label class="form-label" style="color:#554dde; font-weight:600;word-break: break-all;">Contenido</label>
                 <textarea class="form-control" id="Contenido" name="contenido" style="border:1px solid #554dde;#554dde;height:300px;"  required><?=$contenido ?></textarea>
                 </div>
                 <div class="mb-3">

@@ -1,6 +1,6 @@
 <?php include("head.php");
 include("funciones.php");
-
+include_once("sesionUsuario.php");
 
 function getAllPosts(){ 
     require_once 'database/conexion.php';
