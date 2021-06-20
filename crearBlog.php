@@ -1,4 +1,4 @@
-<?php
+<?php //formulario que permite crear publicaciones
 include("head.php");
 include("guardarPost.php");
 include_once("sesionAdmin.php");

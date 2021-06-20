@@ -1,6 +1,7 @@
 <?php
+//aqui encontramos toda la logica que tiene que ver con el usuario 
 
-function setUsuario(){
+function setUsuario(){ //set usuario hace una consulta a la base de datos para agregar un usuario
     require_once 'database/conexion.php';
     $con = getconfig();
 
@@ -40,7 +41,7 @@ function setUsuario(){
 
 }
 
-function getUsuario(){
+function getUsuario(){ //esta funcion devuelve un usuario que coincida con el id que trae el get
     require_once 'database/conexion.php';
     $con = getconfig();
     
@@ -70,7 +71,7 @@ function getUsuario(){
 }
 
 
-function getUsuarios(){
+function getUsuarios(){ //esta funcion trae todos los datos, de todos los usuarios existentes, devuelve un array asocciativo
     require_once 'database/conexion.php';
     $con = getconfig();
 
@@ -92,8 +93,8 @@ function getUsuarios(){
     }
 }
 
-function modificarUsuario(){
-    require_once 'database/conexion.php';
+function modificarUsuario(){ //esta funcion modifica los datos del usuario que coincida con el id que trae post 
+    require_once 'database/conexion.php'; 
     $con = getconfig();
 
     if(!isset($_POST['tipo'])){
@@ -118,7 +119,7 @@ function modificarUsuario(){
         $statement->closeCursor();
         $con = null;
         
-        if($_POST['tipoModificando'] == 1){
+        if($_POST['tipoModificando'] == 1){ //aqui si es usuario de tipo admin devuelve a un lado, si no devuelve a otro
             header('Location: adminUsuarios.php?getUsuarios');
         }
         else{
@@ -131,7 +132,7 @@ function modificarUsuario(){
     }
 
 }
-function modificarContra(){
+function modificarContra(){ //esta funcion modifica la contraseña del usuario
 
     require_once 'database/conexion.php';
     $con = getconfig();
@@ -168,8 +169,8 @@ function modificarContra(){
 
 }
 
-function silenciarUsuario(){
-
+function silenciarUsuario(){ //esta sirve para silenciar o desilenciar el usuario. si el get trae silence se silencia, si no,
+                             //trae disilence, entonces se desilencia                       
     require_once 'database/conexion.php';
     $con = getconfig();
     
@@ -209,7 +210,7 @@ function silenciarUsuario(){
 
 
 
-function eliminarUsuario(){
+function eliminarUsuario(){ //funcion para eliminar usuario, esta elimina el usuario que venga en el get
 
     require_once 'database/conexion.php';
     $con = getconfig();
@@ -241,7 +242,7 @@ function eliminarUsuario(){
 }
 
 
-function iniciarSesion(){
+function iniciarSesion(){ //inicia sesion, crea la cookie
     echo "entre";
     require_once 'database/conexion.php';
     $con = getconfig();
@@ -249,18 +250,18 @@ function iniciarSesion(){
     $usuario = $_POST["usuario"];
     $contra = $_POST["contra"];
     
-    $query = "SELECT * FROM usuarios WHERE usuario= :usuario";
+    $query = "SELECT * FROM usuarios WHERE usuario= :usuario"; 
     $statement = $con->prepare($query);
 
     $statement->execute([
         ':usuario' => $usuario
     ]);
 
-    $res = $statement->fetch(PDO::FETCH_ASSOC);
+    $res = $statement->fetch(PDO::FETCH_ASSOC); //se trae el usuario
     var_dump($res);
-    if(password_verify($contra,$res['contra'])){
+    if(password_verify($contra,$res['contra'])){ //verifica que la contra del usuario sea la que viene en el post
 
-        $query = "SELECT * FROM usuarios WHERE usuario= :usuario";
+        $query = "SELECT * FROM usuarios WHERE usuario= :usuario"; //si es asi preparamos la consulta para traer los datos de ste usuario
         $statement = $con->prepare($query);
 
         $statement->execute([
@@ -269,10 +270,10 @@ function iniciarSesion(){
 
         $loginRow = $statement->fetch(PDO::FETCH_ASSOC);
         
-        if($loginRow != false){
+        if($loginRow != false){ //si viene algo, se inicia sesion, se crea la cookie y se guardan en la super global session, todos los datos necesarios
 
             session_start();
-            setcookie('session_id','token123dhhs25665%#7y', time()+86400,'/');
+            setcookie('session_id','token123dhhs25665%#7y', time()+86400,'/'); //la coockie dura un dia
 
             $_SESSION['id']= $loginRow['id'];
             $_SESSION['nombre']= $loginRow['nombre'];
@@ -284,13 +285,13 @@ function iniciarSesion(){
             $statement->closeCursor();
             $statement = null;
 
-            header('Location: articulos.php');
+            header('Location: articulos.php'); //lo llevamos a articulos
         }
         else{
 
             $statement->closeCursor();
             $statement = null;
-           header('Location: login.php?status=error');
+           header('Location: login.php?status=error'); //si hay error en algo devuelve en el get error para feedback
         }
         
     }
@@ -298,55 +299,58 @@ function iniciarSesion(){
 
         $statement->closeCursor();
         $statement = null;
-        header('Location: login.php?status=error');
+        header('Location: login.php?status=error'); //si hay error en algo devuelve en el get error para feedback
     }
 }
 
 
 function CerrarSesion(){
 
-    session_start();
+    session_start(); //ponemos en null la cookie, destruimos la sesion
     session_destroy();
     setcookie('session_id','null', -1,'/');
 
-    header('Location: index.php');
+    header('Location: index.php'); //mandamos al index
 
 }
 
-if(isset($_GET) && isset($_GET["setUsuario"])){
+
+//Estas son las condiciones para que se ejecute cada funcion, si se cumplen se ejecutarán
+
+if(isset($_GET) && isset($_GET["setUsuario"])){  //si el get trae seteado setUsuario se ejecuta setUsuario
     setUsuario();
 }
 
-if(isset($_GET) && isset($_GET["getUsuarios"])){
+if(isset($_GET) && isset($_GET["getUsuarios"])){ //si el get trae seteado setUsuarios se ejecuta getUsuarios
     $usuarios = getUsuarios();
 }
 
-if(isset($_GET) && isset($_GET["formModificar"]) && isset($_GET["id"]) ){
-    $usuario = getUsuario();
+if(isset($_GET) && isset($_GET["formModificar"]) && isset($_GET["id"]) ){ //si el get trae seteados id y formModificar se ejecuta getUsuario
+    $usuario = getUsuario(); //usuarios es la variable que se utiliza en el form de modificar
 }
 
-if(isset($_GET) && isset($_GET["modificar"])){
+if(isset($_GET) && isset($_GET["modificar"])){ //si el get trae seteado modificar se ejecuta modificarUsuario
     modificarUsuario();
 }
 
-if(isset($_GET) && isset($_GET["modificarContra"])){
+if(isset($_GET) && isset($_GET["modificarContra"])){ //si get trae seteado modificarContra se ejecuta la funcion con el mismo nombre
     modificarContra();
 }
 
 if(isset($_GET) && isset($_GET["aksi"]) && $_GET["aksi"]=='silence' || isset($_GET) && isset($_GET["aksi"]) && $_GET["aksi"]=='disilence'){
-    silenciarUsuario();
+    silenciarUsuario(); //si la condicion se cumple se ejecuta silenciarUsuario
 }
 
 
 if(isset($_GET) && isset($_GET["aksi"]) && $_GET["aksi"]=='delete'){
-    eliminarUsuario();
+    eliminarUsuario(); //si la condicion se cumple se ejecuta eliminarUsuario
 }
 
 
 if(isset($_GET) && isset($_GET["acceder"])){
-    iniciarSesion();
+    iniciarSesion(); //si la condicion se cumple se ejecuta iniciarSesion
 }
 
 if(isset($_GET) && isset($_GET["cerrar"])){
-    CerrarSesion();
+    CerrarSesion(); //si la condicion se cumple se ejecuta la funcion que cierra sesion
 }

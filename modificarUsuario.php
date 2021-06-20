@@ -2,7 +2,7 @@
 include_once("usuarios.php");
 include_once("sesionUsuario.php");
 
-function imprimirTipo($tipo){
+function imprimirTipo($tipo){ //imprime el tipo de usuario que viene en el $usuario segun este guardado en la base de datos
     if($tipo=='1'){
       echo '<option value="0">Usuario</option>
             <option value="1" selected="selected">Administrador</option>';
@@ -79,34 +79,34 @@ function imprimirTipo($tipo){
     let seleccion = $('#tipo').find('option:selected').val()
     console.log(seleccion)
 
-    function validarModificarUsuario(json){ //devuelve false para que el usuario se cambie
+    function validarModificarUsuario(json){ //devuelve false para que el usuario se cambie, el parametro que se necesita es un json
 
-        let usuarioExiste = false
-        let user = $('#username').val()
+        let usuarioExiste = false //bandera para ver si el usuario existe
+        let user = $('#username').val() //variables necesarias para obtener info
         let id = $('#id').val()
         let  info = $('#info-usuario')
 
-        json.forEach(usuario => {
+        json.forEach(usuario => { //iteramos el jason y si el usuario ya existe en la base de datos y si existe se pone en true la bandera
             if(user == usuario['usuario'] && id != usuario['id']){
                 usuarioExiste = true
             }
         })
 
-        if(usuarioExiste){
+        if(usuarioExiste){ //si existe esta funcion retorna false y feedback de error
             info.attr("style","color:#FF4D4D");
             info.text("Nombre de usuario existente, intente con otro")
             return false
         }
         else{
-            info.text(" ")
+            info.text(" ") //si no, se retorna true 
             return true
         }
 
     }
 
-    function validarModificarEmail(json){ //devuelve false para que el email se cambie
+    function validarModificarEmail(json){ //devuelve false para que el email se cambie, el parametro que se necesita es un json
 
-        let emailExiste = false
+        let emailExiste = false    //la logica aqui es igual a validarModificarUsuario() pero aqui validamos la modificacion del email
         let email = $('#email').val()
         let id = $('#id').val()
         let  info = $('#info-email')
@@ -131,22 +131,16 @@ function imprimirTipo($tipo){
 
     function validarModificacion(){ 
 
-            let usuario = validarModificarUsuario(<?php echo json_encode(getUsuarios());?>) 
-            let email = validarModificarEmail(<?php echo json_encode(getUsuarios());?>)
+            let usuario = validarModificarUsuario(<?php echo json_encode(getUsuarios());?>) //aqui imprimos como un json los datos que traemos desde
+            let email = validarModificarEmail(<?php echo json_encode(getUsuarios());?>)    //la base de datos para validar las modificaciones
 
-            console.log(usuario,email)
             if(usuario && email){
-                return true
+                return true //si retorna true el post se envia
             }
             else {
-                return false
+                return false //si no, no y se deben cambiar los datos de modificacion
             }
     }
-
-    /* $("#tipo").change(function(){
-        let seleccion = $('#tipo').find('option:selected').val()
-        console.log(seleccion)
-    }) */
     
 </script>
 

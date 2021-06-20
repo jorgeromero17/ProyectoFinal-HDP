@@ -87,13 +87,13 @@ else { //si no, evaluamos que este seteada la busqueda en el POST
 
         
         <?php  
-            
+            //aqui verificamos que el resultado de la busqueda, si res es menor que uno muestra un mensaje de no haber encontrado resultados
             if(count($res) < 1){
                 echo '<div class="alert alert-danger d-flex aling-content-center" role="alert">
                         <i class="fas fa-heart-broken me-2" style="font-size:25px;"></i><strong>Raios, no se han encontrado resultados...</strong>
                     </div>';
             }
-            else{
+            else{ //si no es así, pues trae todos los resultados que se han buscado o todos, si no se ha buscado nada
                 foreach ($res as $row){
                 $id_usuario= $row["id_usuario"];
                 $id= $row["id"];

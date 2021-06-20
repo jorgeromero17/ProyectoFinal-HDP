@@ -1,12 +1,12 @@
 <?php include("head.php");
  
-if(isset($_COOKIE['session_id'])){
+if(isset($_COOKIE['session_id'])){ //validamos que solo se pueda acceder al login si no esta logeado ya
     if($_COOKIE['session_id'] != "null"){
         header("Location: articulos.php");
     }
 }
 
-function getError(){
+function getError(){ //funcion que imprime mensaje de erro de contraseña y/o usuario
     if(isset($_GET) && isset($_GET["status"])){
         return '<div id="info-email" class="form-text mt-2" style="color:#FF4D4D;">Usuario y/o contraseña incorrectas</div>';
     }
@@ -14,7 +14,7 @@ function getError(){
 
 ?>
 <body>
-
+<!-- formulario que sirva para iniciar sesion -->
     <div class="container">
         <div class="row d-flex justify-content-center mt-5">
             <form action="usuarios.php?acceder" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">

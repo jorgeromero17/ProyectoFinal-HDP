@@ -1,17 +1,15 @@
 <?php include("head.php");
 include_once("sesionAdmin.php");
 
-//include_once("guardarPost.php");
-require_once 'database/conexion.php';
+require_once 'database/conexion.php'; //traemos lo necesario para la conexion
 $con = getconfig();
 date_default_timezone_set('America/El_Salvador');
 
-
-$id=$_GET['id'];
+$id=$_GET['id']; //obtenemos las variables necesarios
 $nombre=$_SESSION['nombre']." ".$_SESSION['apellido'];
-$query="SELECT * FROM posts WHERE id=$id";
+$query="SELECT * FROM posts WHERE id=$id"; //preparamos la consulta 
 $statement = $con->prepare($query);
-        $statement->execute();
+        $statement->execute(); //ejecutamos la consulta
         $res = $statement->fetchAll(PDO::FETCH_ASSOC);
         //cerrar flujo y base de datos
         $statement->closeCursor();
@@ -23,7 +21,6 @@ $statement = $con->prepare($query);
             $img_existente= $row["imagen"];
         }
 ?>
-
 
 <body>
 

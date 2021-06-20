@@ -1,12 +1,10 @@
 <?php 
-
 include("head.php");
 include_once("sesionUsuario.php");
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
 }
-
 ?>
 <body>
 
@@ -55,41 +53,40 @@ if(isset($_GET['id'])){
     function validarPass(){ //devuelve false si la contrasena no esta validada
 
 
-        let contra = $('#password').val()
-        let  info = $('#info-contra')
-        /* console.log(contra) */
+        let contra = $('#password').val()//traemos lo que hay en el campo de contra
+        let  info = $('#info-contra') //traemos el info para mandar feedback
         
-        if(contra.length < 8){
+        if(contra.length < 8){ //si lo que esta en contra es menor que 8, tonces se madna feedback de error
             console.log('contra menor a 8')
             info.attr("style","color:#FF4D4D");
             info.text('La contraseña deben tener 8 caracteres como mínimo')
             return false
         }
         else{
-            let espacios = false
+            let espacios = false //variables que sirven para validar si hay espacios y signos
             let signos = false
 
-            for (let i = 0; i < contra.length; i++) {
+            for (let i = 0; i < contra.length; i++) { //iteramos cada caracter de la contra
                 if(contra.charAt(i) == " "){
-                    espacios = true
+                    espacios = true //si en la hay espacios se pone en true
                 }
                 if((contra.charCodeAt(i) >= 33 && contra.charCodeAt(i) <= 47) || (contra.charCodeAt(i) >= 58 && contra.charCodeAt(i) <= 64) || (contra.charCodeAt(i) >= 91 && contra.charCodeAt(i) <= 96)){
-                    signos = true
+                    signos = true //con charCodeAt verificamos el assci de cada caracter y si hay signos se pone en true
                 }
             }
 
-            if (espacios) {
+            if (espacios) { //si espacios viene true, retorna false, por lo tanto no se va en el post, ademas se manda feedback de error
                 console.log('con espacio')
                 info.attr("style","color:#FF4D4D");
                 info.text('La contraseña no debe contener espacios')
                 return false
             }
-            else{
+            else{ //si signos viene true, retorna true, por lo tanto el post se manda
                 if(signos){
                     console.log('con signo')
                     return true
                 }
-                else{
+                else{ //si espacios viene false, retorna false, por lo tanto no se va en el post, ademas se manda feedback de error
                     console.log('sin signo')
                     info.attr("style","color:#FF4D4D");
                     info.text('La contraseña debe contener signos')

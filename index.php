@@ -1,7 +1,7 @@
 <?php 
 include("head.php");
 
-if(isset($_COOKIE['session_id'])){
+if(isset($_COOKIE['session_id'])){ //validamos que solo se pueda meter al index si no esta logeado
     if($_COOKIE['session_id'] != "null"){
         header("Location: articulos.php");
     }

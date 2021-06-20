@@ -1,11 +1,8 @@
 <?php 
-
 include_once("head.php");
 include_once("usuarios.php");
 include_once("sesionAdmin.php");
-
 ?>
-
 <body>
     <div class="container mt-5">
         <div class="mb-3 d-flex justify-content-center">
@@ -22,8 +19,8 @@ include_once("sesionAdmin.php");
                         <th style="color:#262b47;">Usuario</th>
                         <th style="color:#262b47;">Acciones</th>
                     </tr>
-                </thead>
-                    <?php 
+                </thead> 
+                    <?php //se mestra se manera dinamica lo usuarios que estan registrados, la variable $usuarios la devuelve usuarios.php 
                         $limite = count($usuarios);
                         for ($i=0; $i < $limite; $i++) { 
                             echo '<tr>';
@@ -60,7 +57,11 @@ include_once("sesionAdmin.php");
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-<script> 
+<script>
+//lo siguiente es para darle
+//formato al data table 
+//para que todo este en español
+//en la siguiente función lo cambiamos 
 $(document).ready( function (){
     $('#usuarios').DataTable({
 		"responsive": true,
@@ -79,8 +80,8 @@ $(document).ready( function (){
 		}
 	});
 
-        function ocultarCols(){
-            if (screen.width < 575){
+        function ocultarCols(){ //Aqui es para hacer responsive la tabla, si la pantalla se hace pequeña se van quitando celdas para que no se salga
+            if (screen.width < 575){ //la logica es que si  llega a un tamaño mas pequeño se ocultan celdas, si llega a uno mas grande se muestran
                 $(".id").hide()
                 $(".apellido").hide()
                 $(".email").hide()

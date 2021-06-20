@@ -1,4 +1,6 @@
 <?php
+//aqui se tiene la logica de agregar post, de traer los post y de eliminar los post
+
 //hacemos conexión con la base de datos 
 require_once 'database/conexion.php';
 $con = getconfig();
@@ -158,21 +160,21 @@ function eliminarPost(){
     require_once 'database/conexion.php';
     $con = getconfig();
 
-    try {
-        $query = "DELETE FROM posts WHERE id = :id";
+    try { //preparamos dos consultas, una para eliminar todos los post que tengan el id que viene por el get
+        $query = "DELETE FROM posts WHERE id = :id";//y ora para eliminar todos los comentarios que pertenezcan a ese post
         $query1 = "DELETE FROM coments WHERE id_post = :id";
 
         $statement = $con->prepare($query);
         $statement1 = $con->prepare($query1);
 
-        $statement->execute([
+        $statement->execute([ //se ejecutan ambas consultas
             ':id'=> $_GET["id"]
         ]);
         $statement1->execute([
             ':id'=> $_GET["id"]
         ]);
        
-        $statement->closeCursor();
+        $statement->closeCursor(); //cerramos el flujo de datos
         $con = null;
         
         header("Location:".$_SERVER['HTTP_REFERER']); // Vuelva a la pagina anterior
@@ -184,6 +186,6 @@ function eliminarPost(){
 }
 
 
-if(isset($_GET['delete']) && isset($_GET['id'])){
+if(isset($_GET['delete']) && isset($_GET['id'])){ //eliminar post solo se ejecuta si el id viene seteado con los parametros correspondientes
     eliminarPost();
 }

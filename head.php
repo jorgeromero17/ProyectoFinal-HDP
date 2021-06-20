@@ -16,9 +16,9 @@
 <body>
 <?php
 
-session_start();
+session_start(); 
 
-if(!isset($_COOKIE['session_id'])){
+if(!isset($_COOKIE['session_id'])){ //aqui hacemos que traiga un navbar diferente dependiendo si esta logeado, si es admin o si es usuario normal
     include_once("nav.php");
     
 }

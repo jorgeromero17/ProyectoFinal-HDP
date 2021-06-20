@@ -94,9 +94,9 @@ $(document).ready( function (){
 		}
 	})
 
-        function ocultarCols(){
-            if (screen.width < 400){
-                $(".id").hide()
+        function ocultarCols(){ //Aqui es para hacer responsive la tabla, si la pantalla se hace pequeña se van quitando celdas para que no se salga
+            if (screen.width < 400){ //la logica es que si  llega a un tamaño mas pequeño se ocultan celdas, si llega a uno mas grande se muestran
+                $(".id").hide()     
                 $(".nombre").hide()
                 $(".fecha_crea").hide()
             }

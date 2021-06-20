@@ -6,7 +6,7 @@ include_once("sesionUsuario.php");
 
 ?>
 <body>
-
+    
     <div class="container">
         <div class="row d-flex justify-content-center mt-5">
             <form onsubmit="return validarUsuario()"; action="usuarios.php?setUsuario&from=a" method="post" class="col-11 col-sm-10 col-md-8 col-lg-6 mt-5 p-4" style="border-radius:10px; border:1px solid #554dde; background:white;">
