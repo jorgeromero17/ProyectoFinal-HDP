@@ -51,6 +51,7 @@ $statement = $con->prepare($query);
                     <p class="h5 mt-4 mx-auto" style="width:90%;">Comentarios</p>
                     
                     <?php 
+
                         if(isset($_SESSION['inactivar_coment'])){ //verificamos si esta silenciado, si lo esta no lo deja acceder a la interfaz de comentar
                             if($_SESSION['inactivar_coment']==1){
                               echo '<div class="my-4 mx-auto alert alert-danger alert-dismissible fade show" style=" width:90%;">
@@ -59,23 +60,54 @@ $statement = $con->prepare($query);
                             </div>';  
                             }
                             else{
-                                echo '<form class="my-4 mx-auto d-flex flex-column" style="height:250px; width:90%;">
-                                <textarea class="p-4" name="comentario" id="" cols="30" rows="10" placeholder="Agregar comentario..." style="width:100%;height:200px;;border:1px solid #554dde;background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;"></textarea>
+                                $id=$_SESSION['id']; // Usuario actual
+                                $id_post= $_GET['id'];
+                                echo '<form action="agregarComentario.php" method="POST" class="my-4 mx-auto d-flex flex-column" style="height:250px; width:90%;">
+                                <textarea class="p-4" name="comentario" id="" cols="30" rows="10" placeholder="Agregar comentario..." style="width:100%;height:200px;;border:1px solid #554dde;background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;" required></textarea>
+                                <input name="id_usuario" type="hidden" value="'.$id.'">
+                                <input name="id_post" type="hidden" value="'.$id_post.'">
                                 <button type="submit" class="btn text-light mt-3 align-self-end" style="background:#554dde;font-weight:600;">Agregar</button>
                                 </form>';
                             }
+                            
+                            require_once 'database/conexion.php';
+                            $con = getconfig();
+                            date_default_timezone_set('America/El_Salvador');
+
+
+                            $id_post= $_GET['id'];
+                            $query="SELECT * FROM coments WHERE aprobado=1 AND id_post=$id_post";               
+                            $statement = $con->prepare($query);
+                            $statement->execute();
+                            $res = $statement->fetchAll(PDO::FETCH_ASSOC);
+                            //cerrar flujo y base de datos
+                            $statement->closeCursor();
+                            
+                            foreach ($res as $row){
+                                $id_usuario= $row["id_usuario"];
+                                $consulta="SELECT * FROM usuarios WHERE id=$id_usuario";               
+                                $st = $con->prepare($consulta);
+                                $st->execute();
+                                $aux = $st->fetchAll(PDO::FETCH_ASSOC);
+                                $st->closeCursor();
+                                foreach ($aux as $val){
+                                    $usuario = $val['usuario'];
+                                }
+                                //cerrar flujo y base de datos
+
+                                $fecha= $row["fecha"];
+                                $comentario= $row["comentario"];
+                                echo <<<END
+                                    <div class="my-4 p-4 mx-auto" style="background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;  min-height:200px; width:90%;">
+                                        <strong>[$usuario]</strong> publicó el <span>$fecha</span>
+                                        <br>
+                                        <span>$comentario</span>
+                                    </div>
+                                END;
+                            }
+                            $con = null;
                         }
                     ?>
-
-                    <div class="my-4 p-4 mx-auto" style="background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;  min-height:200px; width:90%;">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta maxime, quisquam, magni quod omnis natus officia.
-                    </div>
-                    <div class="my-4 p-4 mx-auto" style="background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;  min-height:200px; width:90%;">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta maxime, quisquam, magni quod omnis natus officia.
-                    </div>
-                    <div class="my-4 p-4 mx-auto" style="background:#f5f5f5; color:#262b47; font-size:16px; border-radius:10px;  min-height:200px; width:90%;">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta maxime, quisquam, magni quod omnis natus officia.
-                    </div>
                 </div>
                 
             </div>

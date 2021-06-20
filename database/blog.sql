@@ -33,7 +33,8 @@ CREATE TABLE `coments` (
   `id_usuario` int(11) NOT NULL,
   `comentario` text NOT NULL,
   `fecha` date NOT NULL,
-  `aprobado` tinyint(1) NOT NULL
+  `aprobado` tinyint(1) NOT NULL,
+  `id_post` int(1) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
