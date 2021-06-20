@@ -1,9 +1,13 @@
 <?php
 
+//agregamos archivos a necesitar 
 include_once('head.php');
 include_once('guardarPost.php');
 include_once("sesionAdmin.php");
 
+//en las siguientes variables 
+//guardaremos el ID del usuario
+//y el tipo
 $id_usuario= $_SESSION['id'];
 $tipo=$_SESSION['tipo'];
 ?>
@@ -27,8 +31,15 @@ $tipo=$_SESSION['tipo'];
                     </tr>
                 </thead>
                     <?php 
+
+                        //aquí mandamos a llamar a getpost
+                        //y le pasamos como parámetro el ID 
+                        //del usuario antes Guardado, nos trae los datos
+                        //y lo guardamos en la variable post
                         $posts=getpostAdmin($id_usuario);
 
+                        //aquí ya se imprimirá una tabla con todos los post 
+                        //existentes
                         $limite = count($posts);
                         for ($i=0; $i < $limite; $i++) { 
                             echo '<tr>';
@@ -61,6 +72,10 @@ $tipo=$_SESSION['tipo'];
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <script> 
+//lo siguiente es para darle
+//formato al data table 
+//para que todo este en español
+//en la siguiente función lo cambiamos
 $(document).ready( function (){
     $('#posts').DataTable({
 		"responsive": true,
