@@ -3,6 +3,9 @@ include_once("sesionUsuario.php");
 
 require_once 'database/conexion.php';
 $con = getconfig();
+//esto es para obtener la 
+//hora de el Salvador ya que si no lo 
+//ponemos obtiene una hora adelantada
 date_default_timezone_set('America/El_Salvador');
 
 
@@ -10,12 +13,16 @@ $id=$_GET['id'];
 $nombre=$_SESSION['nombre']." ".$_SESSION['apellido'];
 //$query="SELECT * FROM posts WHERE id=$id";
 
+//aquí hacemos una consulta especial ya que necesitamos
+//que nos traiga ciertos datos de 2 tablas diferentes
 $query = "SELECT p.id, u.id, u.nombre,u.apellido, p.titulo, 
 p.contenido, p.fecha_crea, p.imagen 
 FROM posts as p
 JOIN usuarios AS u on u.id=p.id_usuario 
 WHERE p.id=$id ORDER BY p.fecha_crea ASC";
 
+//aquí preparamos la consulta antes 
+//hecha y hacemos un foreach
 $statement = $con->prepare($query);
         $statement->execute();
         $res = $statement->fetchAll(PDO::FETCH_ASSOC);

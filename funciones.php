@@ -1,4 +1,8 @@
 <?php
+//Las dos siguientes funciones nos
+//ayudarán a convertir la fecha
+//obtenida en los dos diferentes
+//formatos 
 function fecha_dmy($fecha){
     $dia = substr($fecha,8,2);
     $mes = substr($fecha,5,2);
