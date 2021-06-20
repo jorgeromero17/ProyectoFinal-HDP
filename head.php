@@ -18,7 +18,7 @@
 
 session_start();
 
-if(!isset($_COOKIE['session_id']) ){
+if(!isset($_COOKIE['session_id'])){
     include_once("nav.php");
     
 }

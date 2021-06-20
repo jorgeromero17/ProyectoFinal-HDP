@@ -3,10 +3,11 @@
 include_once("head.php");
 include_once("usuarios.php");
 
-if(isset($_SESSION['id'])){
-    header("Location: articulos.php");
+if(isset($_COOKIE['session_id'])){
+    if($_COOKIE['session_id'] != "null"){
+        header("Location: articulos.php");
+    }
 }
-
 ?>
 
 <body>

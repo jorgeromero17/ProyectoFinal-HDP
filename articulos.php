@@ -1,8 +1,9 @@
 <?php include("head.php");
 include("funciones.php");
-
+include_once("sesionUsuario.php");
 //aquí hacemos una función donde
 //nos traerá todos los post existentes
+
 function getAllPosts(){ 
     require_once 'database/conexion.php';
     $con = getconfig();

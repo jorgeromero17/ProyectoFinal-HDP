@@ -1,7 +1,9 @@
 <?php include("head.php");
-
-if(isset($_SESSION['id'])){
-    header("Location: articulos.php");
+ 
+if(isset($_COOKIE['session_id'])){
+    if($_COOKIE['session_id'] != "null"){
+        header("Location: articulos.php");
+    }
 }
 
 function getError(){

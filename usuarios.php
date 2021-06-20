@@ -272,7 +272,7 @@ function iniciarSesion(){
         if($loginRow != false){
 
             session_start();
-            setcookie('session_id','token123dhhs25665%#7y', time()+3600,'/');
+            setcookie('session_id','token123dhhs25665%#7y', time()+86400,'/');
 
             $_SESSION['id']= $loginRow['id'];
             $_SESSION['nombre']= $loginRow['nombre'];

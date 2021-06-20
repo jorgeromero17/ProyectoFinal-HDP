@@ -2,6 +2,7 @@
 
 include_once("head.php");
 include_once("usuarios.php");
+include_once("sesionUsuario.php");
 
 ?>
 <body>

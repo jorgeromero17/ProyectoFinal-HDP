@@ -10,7 +10,7 @@ date_default_timezone_set('America/El_Salvador');
 //nos traemos los datos con post
 if(!empty($_POST)){
   $titulo =$_POST["titulo"];
-  $contenido =$_POST["contenido"];
+  $contenido =nl2br($_POST["contenido"]);
   $id_usuario= $_POST['id_usuario'];
   $fecha_crea=date('Y-m-d');
   $dir_image="img"; //directorio de imagenes
@@ -154,3 +154,36 @@ function getpostUser($id_usuario){
     }
 }
 
+function eliminarPost(){
+    require_once 'database/conexion.php';
+    $con = getconfig();
+
+    try {
+        $query = "DELETE FROM posts WHERE id = :id";
+        $query1 = "DELETE FROM coments WHERE id_post = :id";
+
+        $statement = $con->prepare($query);
+        $statement1 = $con->prepare($query1);
+
+        $statement->execute([
+            ':id'=> $_GET["id"]
+        ]);
+        $statement1->execute([
+            ':id'=> $_GET["id"]
+        ]);
+       
+        $statement->closeCursor();
+        $con = null;
+        
+        header("Location:".$_SERVER['HTTP_REFERER']); // Vuelva a la pagina anterior
+
+    } catch (Exception $error) {
+        print "Error!:".$error->getMessage()."<br>";
+        die();
+    }
+}
+
+
+if(isset($_GET['delete']) && isset($_GET['id'])){
+    eliminarPost();
+}

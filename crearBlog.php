@@ -25,7 +25,7 @@ $nombre=$_SESSION['nombre']." ".$_SESSION['apellido'];
 
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" style="color:#554dde; font-weight:600;">Contenido</label>
+                    <label class="form-label" style="color:#554dde; font-weight:600;word-break: break-all;">Contenido</label>
                     <textarea class="form-control" id="Contenido" name="contenido" style="border:1px solid #554dde;height:300px;" required></textarea>
                 </div>
                 <div class="mb-3">

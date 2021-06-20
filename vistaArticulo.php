@@ -1,5 +1,6 @@
 <?php include("head.php");
-//include_once("guardarPost.php");
+include_once("sesionUsuario.php");
+
 require_once 'database/conexion.php';
 $con = getconfig();
 //esto es para obtener la 

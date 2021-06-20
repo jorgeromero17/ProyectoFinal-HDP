@@ -1,6 +1,8 @@
 <?php
 
 include_once 'head.php';
+include_once("sesionAdmin.php");
+
 $id_usuario= $_SESSION['id'];
 $tipo=$_SESSION['tipo'];
 ?>

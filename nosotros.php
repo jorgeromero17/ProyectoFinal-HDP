@@ -1,12 +1,5 @@
 <?php 
 include("head.php");
-
-if(isset($_SESSION['tipo'])){
-    if($_SESSION['tipo']==1){
-        header("Location: articulos.php");
-    }
-}
-
 ?>
 
 <div class="main-bienvenida" style="height: 100vh;">
