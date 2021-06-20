@@ -1,15 +1,20 @@
 <?php include("head.php");
 include("funciones.php");
 
-
+//aquí hacemos una función donde
+//nos traerá todos los post existentes
 function getAllPosts(){ 
     require_once 'database/conexion.php';
     $con = getconfig();
 
+    //haremos una consulta especial ya que
+    //necesitamos el nombre del usuario del post
+    //así que nesecitamos traernos datos de diferentes tablas
     $query = "SELECT p.id, u.id AS id_usuario, u.nombre,u.apellido, p.titulo, p.fecha_crea, p.imagen  
     FROM posts AS p 
     JOIN usuarios AS u ON u.id=p.id_usuario 
     ORDER BY p.fecha_crea DESC";
+    //aquí prepararemos la consulta antes hecha
     $statement = $con->prepare($query);
             $statement->execute();
             $res = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -17,6 +22,7 @@ function getAllPosts(){
             $statement->closeCursor();
             $con = null;
 
+            //retornamos los datos
             return $res;
 }
 
