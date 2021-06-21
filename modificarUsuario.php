@@ -22,10 +22,10 @@ function imprimirTipo($tipo){ //imprime el tipo de usuario que viene en el $usua
                 <div class="mb-3 d-flex justify-content-center">
                     <labl class="h3" style="color:#554dde;">Editar Usuario</label>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" style="color:#554dde; font-weight:600;">Id de Usuario:</label>
-                    <input type="" class="form-control" id="id" name="id"style="border:1px solid #554dde;" readonly <?='value="'.$usuario[0]['id'].'"'?> >
-                </div>
+                <!-- <div class="mb-3"> -->
+                    <!-- <label class="form-label" style="color:#554dde; font-weight:600;">Id de Usuario:</label> -->
+                    <input type="hidden" class="form-control" id="id" name="id"style="border:1px solid #554dde;" readonly <?='value="'.$usuario[0]['id'].'"'?> >
+                <!-- </div> -->
                 <div class="mb-3">
                     <label class="form-label" style="color:#554dde; font-weight:600;">Nombre</label>
                     <input type="firstName" class="form-control" id="nombre" name="nombre"style="border:1px solid #554dde;" required <?='value="'.$usuario[0]['nombre'].'"'?> >

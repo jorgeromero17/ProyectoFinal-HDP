@@ -11,7 +11,7 @@ if(!empty($_POST['comentario'])){//se ejecuta si el post trae la variable coment
     // obtener el id de usuario y id del post
     $id=$_POST['id_usuario'];
     $id_post=$_POST['id_post'];
-    $comentario=$_POST['comentario']; //la consulta de agregar comentario se ejecuta
+    $comentario=nl2br($_POST["comentario"]); //la consulta de agregar comentario se ejecuta
     $query = "INSERT INTO coments(id_usuario,comentario,fecha,aprobado,id_post) VALUES('$id','$comentario',CURDATE(),'0','$id_post')";
 
     $statement = $con->prepare($query); //ejecutamos la consulta

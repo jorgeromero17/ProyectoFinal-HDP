@@ -29,58 +29,65 @@ $tipo=$_SESSION['tipo'];
                 $statement->execute();
                 $res = $statement->fetchAll(PDO::FETCH_ASSOC);
                 $statement->closeCursor();
-                
-                foreach ($res as $row){
-                    $id_usuario= $row["id_usuario"];
-                    $id_post= $row['id_post'];
-                    
-                    // traemos los datos de usuarios
-                    $consulta="SELECT * FROM usuarios WHERE id=$id_usuario";             
-                    $st = $con->prepare($consulta);
-                    $st->execute();
-                    $aux = $st->fetchAll(PDO::FETCH_ASSOC);
-                    $st->closeCursor();
-                    foreach ($aux as $val){
-                        $usuario = $val['usuario'];
-                    }
 
-                    // traemos los posts
-                    $consulta_id_post= "SELECT * FROM posts WHERE id=$id_post";
-                    $state = $con->prepare($consulta_id_post);
-                    $state->execute();
-                    $auxiliar = $state->fetchAll(PDO::FETCH_ASSOC);
-                    $state->closeCursor();
+                if(count($res) < 1){
+                    echo '<div class="alert alert-warning d-flex aling-content-center" role="alert">
+                            <i class="fas fa-search me-2" style="font-size:25px;"></i><strong>No hay comentarios rechazados</strong>
+                        </div>';
+                }else{
 
-                    foreach($auxiliar as $valor){
-                        $titulo_post = $valor['titulo'];
-                    }
-
-                    // Se Muestran los posts no moderados
-                    $fecha= $row["fecha"];
-                    $comentario= $row["comentario"];
-                    $id= $row["id"];
-
-                    echo <<<END
-                            <div class="my-4 p-4 mx-auto" style="background:white; color:#262b47; font-size:16px; border-radius:10px; width:90%; border:1px solid #554dde;">
-                            <div class="mb-3" style="color:#554dde;font-weight:bold;">
-                                [$usuario]
+                    foreach ($res as $row){
+                        $id_usuario= $row["id_usuario"];
+                        $id_post= $row['id_post'];
+                        
+                        // traemos los datos de usuarios
+                        $consulta="SELECT * FROM usuarios WHERE id=$id_usuario";             
+                        $st = $con->prepare($consulta);
+                        $st->execute();
+                        $aux = $st->fetchAll(PDO::FETCH_ASSOC);
+                        $st->closeCursor();
+                        foreach ($aux as $val){
+                            $usuario = $val['usuario'];
+                        }
+    
+                        // traemos los posts
+                        $consulta_id_post= "SELECT * FROM posts WHERE id=$id_post";
+                        $state = $con->prepare($consulta_id_post);
+                        $state->execute();
+                        $auxiliar = $state->fetchAll(PDO::FETCH_ASSOC);
+                        $state->closeCursor();
+    
+                        foreach($auxiliar as $valor){
+                            $titulo_post = $valor['titulo'];
+                        }
+    
+                        // Se Muestran los posts no moderados
+                        $fecha= $row["fecha"];
+                        $comentario= $row["comentario"];
+                        $id= $row["id"];
+    
+                        echo <<<END
+                                <div class="my-4 p-4 mx-auto" style="background:white; color:#262b47; font-size:16px; border-radius:10px; width:90%; border:1px solid #554dde;">
+                                <div class="mb-3" style="color:#554dde;font-weight:bold;">
+                                    [$usuario]
+                                </div>
+                                <div style="min-height:50px;color:#262b47;font-size:18px;font-weight:500;">
+                                    <span>$comentario</span>
+                                </div>
+                                <div class="mt-3">
+                                    <p style="margin:0;color:#4f4c89">En: $titulo_post</p>
+                                    <p style="margin:0;color:#4f4c89">El: $fecha</p>
+                                </div>
+                                <div action="agregar" class="d-flex justify-content-end">
+                                    <a type="button" href="comentarios.php?id=$id&delete" class="btn mx-2" style="background:#white;font-weight:600;border:1px solid #554dde;color:#554dde;">Eliminar</a>
+                                    <a type="button" href="comentarios.php?id=$id&mod=1" class="btn text-light mx-2" style="background:#554dde;font-weight:600;">Aceptar</a>
+                                </div>
                             </div>
-                            <div style="min-height:50px;color:#262b47;font-size:18px;font-weight:500;">
-                                <span>$comentario</span>
-                            </div>
-                            <div class="mt-3">
-                                <p style="margin:0;color:#4f4c89">En: $titulo_post</p>
-                                <p style="margin:0;color:#4f4c89">El: $fecha</p>
-                            </div>
-                            <div action="agregar" class="d-flex justify-content-end">
-                                <a type="button" href="comentarios.php?id=$id&delete" class="btn mx-2" style="background:#white;font-weight:600;border:1px solid #554dde;color:#554dde;">Eliminar</a>
-                                <a type="button" href="comentarios.php?id=$id&mod=1" class="btn text-light mx-2" style="background:#554dde;font-weight:600;">Aceptar</a>
-                            </div>
-                        </div>
-                    END;
-                    }
-                    //cerrar flujo y base de datos
-                    $con = null;
+                        END;
+                        }
+                        //cerrar flujo y base de datos
+                        $con = null;
+                }
                 ?>
         </div>
 

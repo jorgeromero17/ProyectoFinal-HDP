@@ -22,7 +22,7 @@ $tipo=$_SESSION['tipo'];
                 <thead>
                     <tr>
                         <th class="id" style="color:#262b47;">Id</th>
-                        <th class="nombre" style="color:#262b47;">Nombre Usuario</th>
+                        <!-- <th class="nombre" style="color:#262b47;">Nombre Usuario</th> -->
                         <th class="titulo" style="color:#262b47;">Titulo</th>
                        <!--  <th class="contenido" style="color:#262b47;">Contenido</th> -->
                         <th class="fecha_crea" style="color:#262b47;">Fecha de creacion</th>
@@ -44,7 +44,7 @@ $tipo=$_SESSION['tipo'];
                         for ($i=0; $i < $limite; $i++) { 
                             echo '<tr>';
                             echo '<td class="id" style="color:#554dde;">'.$posts[$i]['id'].'</td>';
-                            echo '<td class="nombre" style="color:#554dde;">'.$posts[$i]['nombre']." ".$posts[$i]['apellido'].'</td>';
+                            /* echo '<td class="nombre" style="color:#554dde;">'.$posts[$i]['nombre']." ".$posts[$i]['apellido'].'</td>'; */
                             echo '<td class="titulo" style="color:#554dde;">'.$posts[$i]['titulo'].'</td>';
                            /*  echo '<td class="contenido" style="color:#554dde;">'.$posts[$i]['contenido'].'</td>'; */
                             echo '<td class="fecha_crea" style="color:#554dde;">'.$posts[$i]['fecha_crea'].'</td>';
@@ -55,7 +55,6 @@ $tipo=$_SESSION['tipo'];
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">';
 							echo '<li><a class="dropdown-item" href="modificarPost.php?id='.$posts[$i]['id'].'"><i class="fas fa-edit me-1"></i> Editar</a></li>';
 							echo '<li><a class="dropdown-item" href="guardarPost.php?delete&id='.$posts[$i]['id'].'" onclick="return confirm(\'Esta seguro de borrar los datos '.$posts[$i]['nombre'].'?\')"><i class="fas fa-trash-alt me-1"></i> Borrar</a></li>';
-							echo "<li><a  class='dropdown-item' href='usuarios.php?codigo=".$posts[$i]['id']."'><i class='fas fa-comments me-2'></i>comentarios</a></li>";
 							echo '</ul>';
 							echo '</div>';
 							echo '</td>';
@@ -97,22 +96,22 @@ $(document).ready( function (){
         function ocultarCols(){ //Aqui es para hacer responsive la tabla, si la pantalla se hace pequeña se van quitando celdas para que no se salga
             if (screen.width < 400){ //la logica es que si  llega a un tamaño mas pequeño se ocultan celdas, si llega a uno mas grande se muestran
                 $(".id").hide()     
-                $(".nombre").hide()
+                /* $(".nombre").hide() */
                 $(".fecha_crea").hide()
             }
             if (screen.width >= 400 && screen.width < 600){
                 $(".id").show()
-                $(".nombre").hide()
+                /* $(".nombre").hide() */
                 $(".fecha_crea").hide()
             }
             if (screen.width >= 600 && screen.width < 760){
                 $(".id").show()
-                $(".nombre").hide()
+                /* $(".nombre").hide() */
                 $(".fecha_crea").show()
             }
             if(screen.width >= 768){
                 $(".id").show()
-                $(".nombre").show()
+                /* $(".nombre").show() */
                 $(".fecha_crea").show()
             }
         }

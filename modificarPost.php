@@ -14,10 +14,11 @@ $statement = $con->prepare($query);
         //cerrar flujo y base de datos
         $statement->closeCursor();
         $con = null;
+        $br = array("<br>","<br />"); //array con valores a buscar y reemplazar en el contenido
         foreach ($res as $row){
             $id_usuario= $row["id_usuario"];
             $titulo= $row["titulo"];
-            $contenido= $row["contenido"];
+            $contenido = str_replace($br," ",$row["contenido"]); //limpiamos los <br> con replace para que el usuario no vea eso
             $img_existente= $row["imagen"];
         }
 ?>
@@ -51,7 +52,7 @@ $statement = $con->prepare($query);
                 <div class="mb-3">
                 <label for="formFile" class="form-label" style="color:#554dde; font-weight:600;">Imagen de Portada</label>
                 <input class="form-control" type="file" id="imagenNueva" name="imagenNueva" style="border:1px solid #554dde;" >
-                <input type="text" name='img_existente' id='img_existente' value="<?=$img_existente?>" />
+                <input type="hidden" name='img_existente' id='img_existente' value="<?=$img_existente?>" />
                 <div class="d-grid gap-2 ">
                 <button type="submit" class="btn text-light mt-3" style="background:#554dde;font-weight:600;">Guardar</button>
                 </div>
